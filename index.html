@@ -2,211 +2,380 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Ponte a Prueba</title>
 <style>
-:root{--red:#ED1C24;--red-dark:#B8141A;--red-light:#FDE8E9;--w:#fff;--gray:#f4f4f4;--text:#1a1a1a;--muted:#666;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;width:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#111;display:flex;align-items:center;justify-content:center;}
-#frame{width:min(100vw,calc(100vh*9/16));height:min(100vh,calc(100vw*16/9));background:var(--w);position:relative;overflow:hidden;display:flex;flex-direction:column;}
 
-.hdr{background:var(--red);padding:12px 14px 10px;flex-shrink:0;}
-.hdr-row{display:flex;align-items:center;gap:9px;}
-.hdr-icon{font-size:26px;line-height:1;flex-shrink:0;}
-.hdr-titles{flex:1;min-width:0;}
-.hdr-title{color:var(--w);font-size:15px;font-weight:800;letter-spacing:.04em;display:block;}
-.hdr-sub{color:rgba(255,255,255,.75);font-size:9px;letter-spacing:.06em;}
-.reset-btn{background:rgba(255,255,255,.22);border:none;color:var(--w);width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0;line-height:1;}
-.reset-btn:active{background:rgba(255,255,255,.4);}
-.back-btn{background:rgba(255,255,255,.2);border:none;color:var(--w);font-size:11px;font-weight:600;padding:5px 10px;border-radius:20px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
-.back-btn:active{background:rgba(255,255,255,.35);}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  background:#ED1C24;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-.screen{display:none;flex-direction:column;height:100%;}
+/* ── MÓVIL: columna vertical ── */
+#app{
+  width:100%;
+  max-width:480px;
+  min-height:100vh;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── PC: caja 16:9 horizontal ── */
+@media (min-width:768px){
+  body{align-items:center;}
+  #app{
+    width:90vw;
+    max-width:1100px;
+    height:calc(90vw * 9/16);
+    max-height:90vh;
+    min-height:unset;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 8px 40px rgba(0,0,0,.45);
+    flex-direction:row;
+  }
+  /* En PC: menú lateral izquierdo + contenido derecho */
+  #scr-menu{flex-direction:row;}
+  #menu-left{
+    width:280px;
+    min-width:230px;
+    background:#ED1C24;
+    display:flex;
+    flex-direction:column;
+    flex-shrink:0;
+  }
+  #menu-left .hdr{background:transparent;padding:22px 20px 16px;}
+  #menu-left .hdr-title{font-size:20px;}
+  #menu-right{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  #menu-list{
+    flex:1;
+    overflow-y:auto;
+    padding:16px 16px 8px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    align-content:start;
+  }
+  .menu-btn{margin-bottom:0 !important;}
+  .sf{padding:14px 20px 18px;}
+
+  /* QUIZ en PC: layout lateral */
+  #scr-quiz{flex-direction:row;}
+  #quiz-left{
+    width:260px;
+    min-width:200px;
+    background:#ED1C24;
+    display:flex;
+    flex-direction:column;
+    flex-shrink:0;
+    padding:22px 20px 20px;
+  }
+  #quiz-left .hdr{background:transparent;padding:0 0 14px 0;}
+  #quiz-left .hdr-title{font-size:17px;}
+  #quiz-right{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+  .quiz-body{flex:1;overflow-y:auto;padding:20px 22px 10px;}
+  .quiz-foot{padding:10px 22px 18px;}
+
+  /* RESULT en PC */
+  #scr-result{flex-direction:row;}
+  #res-left{
+    width:260px;
+    min-width:200px;
+    background:#ED1C24;
+    display:flex;
+    flex-direction:column;
+    flex-shrink:0;
+    padding:22px 20px 20px;
+  }
+  #res-left .hdr{background:transparent;padding:0;}
+  #res-left .hdr-title{font-size:17px;}
+  #res-right{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+  #res-body{padding:20px 22px;}
+  #res-foot{padding:10px 22px 18px;}
+
+  .q-text{font-size:17px;}
+  .opt{font-size:15px;padding:13px 16px;}
+  .menu-name{font-size:15px;}
+  .menu-qs{font-size:12px;}
+  .sf-cv{font-size:14px;}
+}
+
+/* ─── HEADER ─── */
+.hdr{background:#ED1C24;padding:14px 16px 12px;flex-shrink:0;}
+.hdr-row{display:flex;align-items:center;gap:10px;}
+.hdr-icon{font-size:30px;line-height:1;flex-shrink:0;}
+.hdr-texts{flex:1;}
+.hdr-title{color:#fff;font-size:19px;font-weight:800;letter-spacing:.04em;display:block;line-height:1.2;}
+.hdr-sub{color:rgba(255,255,255,.75);font-size:11px;letter-spacing:.05em;display:block;margin-top:2px;}
+.reset-btn{background:rgba(255,255,255,.25);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.back-btn{background:rgba(255,255,255,.25);border:none;color:#fff;font-size:13px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;}
+
+/* ─── SCREENS ─── */
+.screen{display:none;flex-direction:column;flex:1;}
 .screen.active{display:flex;}
 
-/* MENU */
-#menu-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px 6px;display:flex;flex-direction:column;gap:7px;}
-.menu-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:11px;border:1.5px solid #e8e8e8;background:var(--w);cursor:pointer;text-align:left;}
-.menu-btn:active{background:var(--gray);}
+/* ══ MENU ══ */
+.menu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 12px 8px;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;}
+.menu-btn{
+  display:flex;flex-direction:column;align-items:flex-start;gap:6px;
+  width:100%;padding:14px 12px;border-radius:14px;
+  border:2px solid #e8e8e8;background:#fff;cursor:pointer;text-align:left;
+}
 .menu-btn.done{border-color:#2e7d32;background:#f0faf0;}
-.menu-btn.done .mb-icon{background:#2e7d32;}
-.mb-icon{width:34px;height:34px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
-.menu-info{flex:1;}
-.menu-name{font-size:13px;font-weight:600;color:var(--text);}
-.menu-count{font-size:11px;color:var(--muted);margin-top:1px;}
-.menu-score{font-size:13px;font-weight:700;color:#2e7d32;flex-shrink:0;}
-.menu-score.pending{color:#bbb;}
-.menu-arrow{font-size:14px;color:#ccc;flex-shrink:0;}
+.menu-btn.done .mb-ico{background:#2e7d32;}
+.mb-top{display:flex;align-items:center;justify-content:space-between;width:100%;}
+.mb-ico{width:38px;height:38px;border-radius:10px;background:#ED1C24;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;}
+.menu-arr{font-size:18px;color:#ccc;}
+.menu-arr.done-arr{color:#2e7d32;}
+.menu-name{font-size:14px;font-weight:800;color:#1a1a1a;line-height:1.2;}
+.menu-bottom{display:flex;justify-content:space-between;align-items:center;width:100%;}
+.menu-qs{font-size:11px;color:#888;}
+.menu-sc{font-size:13px;font-weight:700;color:#2e7d32;}
+.menu-sc.pend{color:#bbb;}
 
-#menu-footer{flex-shrink:0;background:var(--gray);border-top:1px solid #e8e8e8;padding:10px 14px 12px;}
-.sf-title{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
-.sf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px;}
-.sf-cell{background:var(--w);border-radius:8px;padding:6px 4px;text-align:center;border:1px solid #e8e8e8;}
-.sf-cell.done-cell{border-color:#2e7d32;}
-.sf-sec{font-size:9px;color:var(--muted);line-height:1.2;margin-bottom:2px;}
-.sf-val{font-size:13px;font-weight:700;color:#bbb;}
-.sf-val.done-val{color:#2e7d32;}
-.sf-total{background:var(--red);border-radius:10px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;}
-.sf-total-label{color:rgba(255,255,255,.85);font-size:12px;font-weight:600;}
-.sf-total-val{color:var(--w);font-size:18px;font-weight:800;}
+/* scoreboard */
+.sf{flex-shrink:0;background:#f5f5f5;border-top:1px solid #eee;padding:12px 14px 16px;}
+.sf-ttl{font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
+.sf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;}
+.sf-cell{background:#fff;border-radius:8px;padding:7px 4px;text-align:center;border:1px solid #eee;}
+.sf-cell.ok{border-color:#2e7d32;}
+.sf-cn{font-size:9px;color:#999;line-height:1.3;margin-bottom:2px;}
+.sf-cv{font-size:13px;font-weight:700;color:#ccc;}
+.sf-cv.ok{color:#2e7d32;}
+.sf-total{background:#ED1C24;border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;}
+.sf-tl{color:rgba(255,255,255,.85);font-size:13px;font-weight:600;}
+.sf-tv{color:#fff;font-size:20px;font-weight:800;}
 
-/* QUIZ */
-#quiz-hdr-extra{margin-top:6px;}
-.prog-bg{background:rgba(255,255,255,.3);border-radius:99px;height:4px;}
-.prog-fill{height:4px;border-radius:99px;background:var(--w);transition:width .35s;}
-.prog-row{display:flex;justify-content:space-between;color:rgba(255,255,255,.8);font-size:10px;margin-top:4px;}
-#quiz-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 13px 6px;display:flex;flex-direction:column;gap:8px;}
-.sec-pill{display:inline-block;background:var(--red-light);color:var(--red-dark);font-size:10px;font-weight:600;padding:3px 10px;border-radius:99px;align-self:flex-start;}
-.q-text{font-size:14px;font-weight:600;color:var(--text);line-height:1.45;}
-.options{display:flex;flex-direction:column;gap:6px;}
-.opt{width:100%;text-align:left;padding:10px 12px;border:1.5px solid #e0e0e0;border-radius:10px;background:var(--w);color:var(--text);font-size:13px;line-height:1.35;cursor:pointer;-webkit-appearance:none;}
-.opt:active:not(:disabled){transform:scale(.985);}
+/* ══ QUIZ ══ */
+.quiz-sub{margin-top:8px;}
+.prog-bg{background:rgba(255,255,255,.35);border-radius:99px;height:5px;}
+.prog-fill{height:5px;border-radius:99px;background:#fff;transition:width .35s ease;}
+.prog-row{display:flex;justify-content:space-between;color:rgba(255,255,255,.85);font-size:11px;margin-top:5px;}
+.quiz-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px 10px;}
+.sec-pill{display:inline-block;background:#FDE8E9;color:#B8141A;font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;margin-bottom:12px;}
+.q-text{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.5;margin-bottom:16px;}
+.opt{
+  display:block;width:100%;text-align:left;
+  padding:13px 16px;border:2px solid #e0e0e0;border-radius:12px;
+  background:#fff;color:#1a1a1a;font-size:14px;line-height:1.4;
+  cursor:pointer;margin-bottom:9px;-webkit-appearance:none;font-family:inherit;
+}
 .opt.correct{background:#e6f4ea;border-color:#2e7d32;color:#1b5e20;}
 .opt.wrong{background:#fdecea;border-color:#c62828;color:#7f0000;}
 .opt.reveal{background:#e6f4ea;border-color:#2e7d32;color:#1b5e20;}
 .opt:disabled{cursor:default;}
-.fb{border-radius:8px;padding:9px 12px;font-size:12px;font-weight:500;display:none;}
+.fb{border-radius:10px;padding:11px 14px;font-size:14px;font-weight:600;display:none;margin-top:4px;}
 .fb.show{display:block;}
 .fb.ok{background:#e6f4ea;color:#1b5e20;}
 .fb.ko{background:#fdecea;color:#7f0000;}
-#quiz-footer{flex-shrink:0;padding:8px 13px 12px;}
-.next-btn{width:100%;padding:13px;border-radius:12px;background:var(--red);color:var(--w);border:none;font-size:14px;font-weight:600;cursor:pointer;display:none;-webkit-appearance:none;}
-.next-btn:active{background:var(--red-dark);}
+.quiz-foot{flex-shrink:0;padding:10px 14px 20px;}
+.next-btn{width:100%;padding:16px;border-radius:14px;background:#ED1C24;color:#fff;border:none;font-size:16px;font-weight:700;cursor:pointer;display:none;font-family:inherit;}
+.next-btn:active{background:#B8141A;}
 
-/* RESULT */
-#res-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 13px;display:flex;flex-direction:column;gap:10px;}
-.score-card{background:var(--red);border-radius:14px;padding:18px;text-align:center;}
-.sc-num{font-size:50px;font-weight:800;color:var(--w);line-height:1;}
-.sc-of{font-size:12px;color:rgba(255,255,255,.8);margin-top:2px;}
-.sc-pct{font-size:20px;font-weight:700;color:var(--w);margin-top:5px;}
-.sc-msg{font-size:12px;color:rgba(255,255,255,.8);margin-top:5px;}
-.rev-title{font-size:12px;font-weight:700;color:var(--text);}
-.rev-item{background:var(--gray);border-radius:10px;padding:9px 11px;}
-.rev-q{font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.35;}
-.rev-w{font-size:11px;color:#c62828;margin-bottom:2px;}
-.rev-r{font-size:11px;color:#2e7d32;}
-#res-footer{flex-shrink:0;padding:8px 13px 14px;display:flex;gap:8px;}
-.res-btn{flex:1;padding:13px;border-radius:12px;border:none;font-size:13px;font-weight:600;cursor:pointer;-webkit-appearance:none;}
-.res-btn.primary{background:var(--red);color:var(--w);}
-.res-btn.primary:active{background:var(--red-dark);}
-.res-btn.secondary{background:var(--gray);color:var(--text);border:1.5px solid #e0e0e0;}
-.res-btn.secondary:active{background:#e8e8e8;}
+/* ══ RESULT ══ */
+#res-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px;}
+.score-card{background:#ED1C24;border-radius:16px;padding:22px;text-align:center;margin-bottom:14px;}
+.sc-n{font-size:56px;font-weight:900;color:#fff;line-height:1;}
+.sc-of{font-size:13px;color:rgba(255,255,255,.8);margin-top:4px;}
+.sc-pct{font-size:22px;font-weight:800;color:#fff;margin-top:8px;}
+.sc-msg{font-size:13px;color:rgba(255,255,255,.85);margin-top:6px;line-height:1.4;}
+.rev-ttl{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:10px;}
+.rev-item{background:#f5f5f5;border-radius:12px;padding:10px 12px;margin-bottom:8px;}
+.rev-q{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:5px;line-height:1.4;}
+.rev-w{font-size:12px;color:#c62828;margin-bottom:3px;}
+.rev-r{font-size:12px;color:#2e7d32;}
+#res-foot{flex-shrink:0;padding:10px 14px 24px;display:flex;gap:10px;}
+.rbtn{flex:1;padding:15px;border-radius:14px;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
+.rbtn.pri{background:#ED1C24;color:#fff;}
+.rbtn.pri:active{background:#B8141A;}
+.rbtn.sec{background:#f0f0f0;color:#1a1a1a;border:2px solid #ddd;}
 </style>
 </head>
 <body>
-<div id="frame">
+<div id="app">
 
-<!-- MENU -->
+<!-- ══════════ MENU ══════════ -->
 <div id="scr-menu" class="screen active">
-  <div class="hdr">
-    <div class="hdr-row">
-      <span class="hdr-icon">📝</span>
-      <div class="hdr-titles">
-        <span class="hdr-title">PONTE A PRUEBA</span>
-        <span class="hdr-sub">Cuestionario interactivo</span>
+  <!-- móvil: header arriba; PC: columna izquierda roja -->
+  <div id="menu-left">
+    <div class="hdr">
+      <div class="hdr-row">
+        <span class="hdr-icon">📝</span>
+        <div class="hdr-texts">
+          <span class="hdr-title">PONTE A PRUEBA</span>
+          <span class="hdr-sub">Cuestionario interactivo</span>
+        </div>
+        <button class="reset-btn" onclick="resetAll()" title="Reiniciar todo">&#x21BA;</button>
       </div>
-      <button class="reset-btn" onclick="resetAll()" title="Reiniciar todo">&#x21BA;</button>
     </div>
+    <!-- en PC el scoreboard va en la columna izquierda -->
+    <div class="sf pc-only" id="sf-left" style="display:none;flex:1;flex-direction:column;justify-content:flex-end;"></div>
   </div>
-  <div id="menu-body"></div>
-  <div id="menu-footer">
-    <div class="sf-title">Progreso y puntuaciones</div>
-    <div class="sf-grid" id="sf-grid"></div>
-    <div class="sf-total">
-      <span class="sf-total-label">Puntuación total</span>
-      <span class="sf-total-val" id="sf-total-val">—</span>
+
+  <div id="menu-right" style="display:contents;">
+    <div class="menu-scroll" id="menu-list"></div>
+    <div class="sf" id="sf-bottom">
+      <div class="sf-ttl">Progreso y puntuaciones</div>
+      <div class="sf-grid" id="sf-grid"></div>
+      <div class="sf-total">
+        <span class="sf-tl">Puntuación total</span>
+        <span class="sf-tv" id="sf-tv">—</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- QUIZ -->
+<!-- ══════════ QUIZ ══════════ -->
 <div id="scr-quiz" class="screen">
-  <div class="hdr">
-    <div class="hdr-row">
-      <span class="hdr-icon">📝</span>
-      <div class="hdr-titles">
-        <span class="hdr-title" id="quiz-section-title"></span>
-        <span class="hdr-sub">Cuestionario interactivo</span>
+  <div id="quiz-left">
+    <div class="hdr">
+      <div class="hdr-row">
+        <span class="hdr-icon">📝</span>
+        <div class="hdr-texts">
+          <span class="hdr-title" id="q-sec-title"></span>
+          <span class="hdr-sub">Cuestionario interactivo</span>
+        </div>
+        <button class="back-btn" onclick="goMenu()">← Menú</button>
       </div>
-      <button class="back-btn" onclick="goMenu()">← Menú</button>
-    </div>
-    <div id="quiz-hdr-extra">
-      <div class="prog-bg"><div class="prog-fill" id="prog-fill"></div></div>
-      <div class="prog-row"><span id="prog-txt"></span><span id="prog-score"></span></div>
+      <div class="quiz-sub">
+        <div class="prog-bg"><div class="prog-fill" id="prog-fill"></div></div>
+        <div class="prog-row"><span id="prog-txt"></span><span id="prog-sc"></span></div>
+      </div>
     </div>
   </div>
-  <div id="quiz-body">
-    <span class="sec-pill" id="sec-pill"></span>
-    <div class="q-text" id="q-text"></div>
-    <div class="options" id="options"></div>
-    <div class="fb" id="fb"></div>
-  </div>
-  <div id="quiz-footer">
-    <button class="next-btn" id="next-btn" onclick="nextQ()"></button>
+  <div id="quiz-right">
+    <div class="quiz-body" id="quiz-body">
+      <div class="sec-pill" id="sec-pill"></div>
+      <div class="q-text" id="q-text"></div>
+      <div id="opts"></div>
+      <div class="fb" id="fb"></div>
+    </div>
+    <div class="quiz-foot">
+      <button class="next-btn" id="next-btn" onclick="nextQ()"></button>
+    </div>
   </div>
 </div>
 
-<!-- RESULT -->
+<!-- ══════════ RESULT ══════════ -->
 <div id="scr-result" class="screen">
-  <div class="hdr">
-    <div class="hdr-row">
-      <span class="hdr-icon">📝</span>
-      <div class="hdr-titles">
-        <span class="hdr-title" id="res-section-title"></span>
-        <span class="hdr-sub">Cuestionario interactivo</span>
+  <div id="res-left">
+    <div class="hdr">
+      <div class="hdr-row">
+        <span class="hdr-icon">📝</span>
+        <div class="hdr-texts">
+          <span class="hdr-title" id="res-title"></span>
+          <span class="hdr-sub">Cuestionario interactivo</span>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="res-body">
-    <div class="score-card">
-      <div class="sc-num" id="sc-num"></div>
-      <div class="sc-of">respuestas correctas</div>
-      <div class="sc-pct" id="sc-pct"></div>
-      <div class="sc-msg" id="sc-msg"></div>
+    <div style="padding:14px 0 0;color:rgba(255,255,255,.85);">
+      <div class="score-card" id="score-card-side" style="display:none;"></div>
     </div>
-    <div class="rev-title" id="rev-title"></div>
-    <div id="rev-list"></div>
   </div>
-  <div id="res-footer">
-    <button class="res-btn secondary" onclick="retrySection()">Reintentar</button>
-    <button class="res-btn primary" onclick="goMenu()">← Menú principal</button>
+  <div id="res-right">
+    <div id="res-body">
+      <div class="score-card" id="score-card-main">
+        <div class="sc-n" id="sc-n"></div>
+        <div class="sc-of">respuestas correctas</div>
+        <div class="sc-pct" id="sc-pct"></div>
+        <div class="sc-msg" id="sc-msg"></div>
+      </div>
+      <div class="rev-ttl" id="rev-ttl"></div>
+      <div id="rev-list"></div>
+    </div>
+    <div id="res-foot">
+      <button class="rbtn sec" onclick="retrySection()">Reintentar</button>
+      <button class="rbtn pri" onclick="goMenu()">← Menú</button>
+    </div>
   </div>
 </div>
 
-</div>
+</div><!-- #app -->
 
 <script>
-const SECTIONS=[
-  {id:'calidad',name:'Calidad',icon:'🎯'},
-  {id:'aplicaciones',name:'Aplicaciones',icon:'📱'},
-  {id:'multimap',name:'Multimap',icon:'💶'},
-  {id:'font',name:'Cob. Fontanería',icon:'🔧'},
-  {id:'alba',name:'Cob. Albañilería',icon:'🏗️'},
-  {id:'elec',name:'Daños Eléctricos',icon:'⚡'},
-  {id:'crist',name:'Cristalería',icon:'🪟'},
-  {id:'tarifas',name:'Tarifas',icon:'📋'},
+var IS_PC = window.innerWidth >= 768;
+
+/* ── Adaptar estructura al tamaño de pantalla ── */
+function adaptLayout(){
+  IS_PC = window.innerWidth >= 768;
+  var menuLeft = document.getElementById('menu-left');
+  var menuRight = document.getElementById('menu-right');
+  var menuList = document.getElementById('menu-list');
+  var sfBottom = document.getElementById('sf-bottom');
+  var quizLeft = document.getElementById('quiz-left');
+  var quizRight = document.getElementById('quiz-right');
+  var resLeft = document.getElementById('res-left');
+  var resRight = document.getElementById('res-right');
+
+  if(IS_PC){
+    /* MENU: columna izq roja + columna dcha blanca */
+    menuRight.style.cssText='display:flex;flex-direction:column;flex:1;overflow:hidden;background:#fff;';
+    menuLeft.style.cssText='width:260px;min-width:220px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;';
+    menuList.style.cssText='flex:1;overflow-y:auto;padding:16px 14px 8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;';
+    sfBottom.style.cssText='flex-shrink:0;background:#f5f5f5;border-top:1px solid #eee;padding:12px 14px 14px;';
+    /* QUIZ */
+    quizLeft.style.cssText='width:260px;min-width:220px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;padding:0;';
+    quizRight.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;';
+    /* RESULT */
+    resLeft.style.cssText='width:260px;min-width:220px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;padding:0;';
+    resRight.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;';
+  } else {
+    menuRight.style.cssText='display:contents;';
+    menuLeft.style.cssText='';
+    menuList.style.cssText='flex:1;overflow-y:auto;padding:14px 12px 8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;';
+    sfBottom.style.cssText='';
+    quizLeft.style.cssText='display:none;'; /* ocultar panel lateral en móvil */
+    quizRight.style.cssText='display:flex;flex-direction:column;flex:1;overflow:hidden;';
+    resLeft.style.cssText='display:none;';
+    resRight.style.cssText='display:flex;flex-direction:column;flex:1;overflow:hidden;';
+  }
+}
+
+window.addEventListener('resize', function(){adaptLayout();});
+
+var SECS=[
+  {id:'conceptos', name:'Conceptos básicos', icon:'🎯'},
+  {id:'aplic',     name:'Aplicaciones',      icon:'📱'},
+  {id:'multimap',  name:'Multimap',          icon:'💶'},
+  {id:'font',      name:'Cob. Fontanería',   icon:'🔧'},
+  {id:'alba',      name:'Cob. Albañilería',  icon:'🏗️'},
+  {id:'elec',      name:'Daños Eléctricos',  icon:'⚡'},
+  {id:'crist',     name:'Cristalería',       icon:'🪟'},
+  {id:'tarifas',   name:'Tarifas',           icon:'📋'}
 ];
 
-const ALL_Q=[
-  {s:'calidad',q:'¿Qué es una Asistencia?',o:['Trabajos no cubiertos por póliza y que PAGA EL CLIENTE','Trabajos cubiertos por póliza y que PAGA MAPFRE','Un siniestro excluido'],a:0},
-  {s:'calidad',q:'¿Qué es un seguro de Comunidad con garantía amplia?',o:['El que cubre el continente comunitario','El que no cubre una vivienda particular','El que cubre continente comunitario y privativo de las viviendas'],a:2},
-  {s:'calidad',q:'¿Cuántas veces intento contactar si no me cogen el teléfono?',o:['Una o dos veces a lo sumo','6 veces durante la primera hora','Durante 3 días en diferentes horarios o a lo largo del día en fontanería'],a:2},
-  {s:'calidad',q:'¿Con qué prioridad debo abrir un servicio posterior?',o:['Normal siempre','Inmediato no urgente siempre','Normal para daños e Inmediato no urgente para coordinación o servicios prioritarios'],a:2},
-  {s:'calidad',q:'¿Estoy pendiente de un material o no me pueden atender hasta dentro de 5 días?',o:['Retraso mi servicio para que no me cuente en la ficha','Me quedo el servicio, informando previamente al cliente si es por material','Dejo el servicio Pendiente de Cliente hasta la fecha prevista'],a:1},
-  {s:'calidad',q:'¿Cuándo debo hacer una video ayuda?',o:['Para que me autoricen a enviar un localizador o resinado de tuberías','Para que me autoricen a enviar un gremio de zanjas o andamios','Las dos anteriores son verdaderas'],a:2},
-  {s:'aplicaciones',q:'La gestión de un servicio con Appcol sigue el siguiente orden:',o:['Primer contacto – Inicio Reparación – Parte de Trabajo – Fin','Primer contacto – Inicio Reparación – Fotos antes/después – Parte de Trabajo – Fin','Inicio Reparación – Fotos antes/después – Fin – Parte de Trabajo'],a:1},
-  {s:'aplicaciones',q:'¿Qué funciones tiene el menú inferior de Appcol?',o:['Parte de trabajo – Video ayuda – IPS – Fotos','Fotos – Hitos – Parte de trabajo','Fotos – Parte de trabajo – Hitos – Video ayuda – IPS – Aplazamientos'],a:2},
-  {s:'aplicaciones',q:'El asegurado no acepta un presupuesto, ¿cómo descuento?',o:['Por opción de Trabajo realizado, poniendo que no acepta ppto.','Por la opción de Presupuesto/Autorización','Por la opción de Aplazamiento'],a:1},
-  {s:'aplicaciones',q:"¿Cuándo respondo sí a '¿existe información relevante para la compañía?'",o:['Cuando quiera dejar anotado algo de lo sucedido','Solo cuando se necesite gestión posterior por Mapfre y no esté en otra pregunta','Para enviar otro gremio después de mi intervención'],a:1},
-  {s:'aplicaciones',q:'Quiero enviar otro gremio después de mi intervención, ¿cómo hago?',o:['Llamo a Batería de proveedores para abrirlo','Lo pongo en información relevante para la compañía al descontar','Abriendo IPS desde Appcol o Intervención posterior desde Infocol'],a:2},
-  {s:'aplicaciones',q:'Si tengo que descontar un servicio a cero, ¿tengo que poner algún código?',o:['No es necesario hacer nada','Hay que añadir un código con importe cero','Llamo a Batería de proveedores para que lo descuenten'],a:1},
-  {s:'aplicaciones',q:'El cliente solicita indemnización, ¿cómo descuento?',o:['Por trabajo realizado, marcando información relevante para la compañía','Simplemente poniéndolo en mi descuento por trabajo realizado','Por la opción de Presupuesto/Autorización'],a:2},
-  {s:'aplicaciones',q:'¿Puedo abrir una asistencia al asegurado si me lo solicita un cliente?',o:['No, eso lo debe hacer el cliente llamando a la compañía','Sí, por APPCOL opción IPS me abro la asistencia','Sí, por APPCOL opción IPS o por Infocol marcando "existe intervención posterior"'],a:2},
-  {s:'aplicaciones',q:'¿Cómo retraso un servicio para otro momento?',o:['Marcando Hito de Aplazamiento por Appcol','Por Retraso del Servicio en Appcol o por opción Aplazamiento en Infocol','Dejarlo pendiente de cliente hasta que llame'],a:1},
-  {s:'multimap',q:'Las condiciones para la aplicación del IVA reducido son:',o:['Material ≤40% del total, no vivienda en alquiler y sin reforma en menos de dos años','A cualquier cliente si el material no supera el 40% del total','Que no sea vivienda en alquiler y tenga más de dos años, sin importar el importe'],a:0},
+var QQ=[
+  {s:'conceptos',q:'¿Qué es una Asistencia?',o:['Trabajos no cubiertos por póliza y que PAGA EL CLIENTE','Trabajos cubiertos por póliza y que PAGA MAPFRE','Un siniestro excluido'],a:0},
+  {s:'conceptos',q:'¿Qué es un seguro de Comunidad con garantía amplia?',o:['El que cubre el continente comunitario','El que no cubre una vivienda particular','El que cubre continente comunitario y privativo de las viviendas'],a:2},
+  {s:'conceptos',q:'¿Cuántas veces intento contactar si no me cogen el teléfono?',o:['Una o dos veces a lo sumo','6 veces durante la primera hora','Durante 3 días en diferentes horarios o a lo largo del día en fontanería'],a:2},
+  {s:'conceptos',q:'¿Con qué prioridad debo abrir un servicio posterior?',o:['Normal siempre','Inmediato no urgente siempre','Normal para daños e Inmediato no urgente para coordinación o servicios prioritarios'],a:2},
+  {s:'conceptos',q:'¿Estoy pendiente de un material o no me pueden atender hasta dentro de 5 días?',o:['Retraso mi servicio para que no me cuente en la ficha','Me quedo el servicio, informando previamente al cliente si es por material','Dejo el servicio Pendiente de Cliente hasta la fecha prevista'],a:1},
+  {s:'conceptos',q:'¿Cuándo debo hacer una video ayuda?',o:['Para que me autoricen a enviar un localizador o resinado de tuberías','Para que me autoricen a enviar un gremio de zanjas o andamios','Las dos anteriores son verdaderas'],a:2},
+  {s:'aplic',q:'La gestión de un servicio con Appcol sigue el siguiente orden:',o:['Primer contacto – Inicio Reparación – Parte de Trabajo – Fin','Primer contacto – Inicio Reparación – Fotos antes/después – Parte de Trabajo – Fin','Inicio Reparación – Fotos antes/después – Fin – Parte de Trabajo'],a:1},
+  {s:'aplic',q:'¿Qué funciones tiene el menú inferior de Appcol?',o:['Parte de trabajo – Video ayuda – IPS – Fotos','Fotos – Hitos – Parte de trabajo','Fotos – Parte de trabajo – Hitos – Video ayuda – IPS – Aplazamientos'],a:2},
+  {s:'aplic',q:'El asegurado no acepta un presupuesto, ¿cómo descuento?',o:['Por opción de Trabajo realizado, poniendo que no acepta ppto.','Por la opción de Presupuesto/Autorización','Por la opción de Aplazamiento'],a:1},
+  {s:'aplic',q:'¿Cuándo respondo sí a "¿existe información relevante para la compañía?"',o:['Cuando quiera dejar anotado algo de lo sucedido','Solo cuando se necesite gestión posterior por Mapfre y no esté en otra pregunta','Para enviar otro gremio después de mi intervención'],a:1},
+  {s:'aplic',q:'Quiero enviar otro gremio después de mi intervención, ¿cómo hago?',o:['Llamo a Batería de proveedores para abrirlo','Lo pongo en información relevante para la compañía al descontar','Abriendo IPS desde Appcol o Intervención posterior desde Infocol'],a:2},
+  {s:'aplic',q:'Si tengo que descontar un servicio a cero, ¿tengo que poner algún código?',o:['No es necesario hacer nada','Hay que añadir un código con importe cero','Llamo a Batería de proveedores para que lo descuenten'],a:1},
+  {s:'aplic',q:'El cliente solicita indemnización, ¿cómo descuento?',o:['Por trabajo realizado, marcando información relevante para la compañía','Simplemente poniéndolo en mi descuento por trabajo realizado','Por la opción de Presupuesto/Autorización'],a:2},
+  {s:'aplic',q:'¿Puedo abrir una asistencia al asegurado si me lo solicita un cliente?',o:['No, eso lo debe hacer el cliente llamando a la compañía','Sí, por APPCOL opción IPS me abro la asistencia','Sí, por APPCOL opción IPS o por Infocol marcando "existe intervención posterior"'],a:2},
+  {s:'aplic',q:'¿Cómo retraso un servicio para otro momento?',o:['Marcando Hito de Aplazamiento por Appcol','Por Retraso del Servicio en Appcol o por opción Aplazamiento en Infocol','Dejarlo pendiente de cliente hasta que llame'],a:1},
+  {s:'multimap',q:'Las condiciones para la aplicación del IVA reducido son:',o:['Material no supera el 40% del total, no vivienda en alquiler y sin reforma en menos de dos años','A cualquier cliente si el material no supera el 40% del total','Que no sea vivienda en alquiler y tenga más de dos años, sin importar el importe'],a:0},
   {s:'multimap',q:'¿Cómo gestiono el pago de la Asistencia?',o:['En efectivo prioritariamente','Preferiblemente por recibo domiciliado o por tarjeta','A partir de 1.500€ con pago adelantado del cliente','La b y la c son correctas'],a:3},
-  {s:'multimap',q:'Si el asegurado se lo tiene que pensar, ¿qué pasos sigo en Appcol?',o:['Dejo abierto el parte una semana','Selecciono "PENDIENTE DE ACEPTACIÓN" y queda cerrado automáticamente','Selecciono "PENDIENTE DE ACEPTACIÓN" y luego lo cierro por Infocol con "PRESUPUESTO/AUTORIZACIÓN"'],a:2},
-  {s:'multimap',q:'Si el cliente no está presente, ¿quién firma el presupuesto?',o:['Si el asegurado no firma, no realizaré el trabajo','Puede firmar otra persona autorizada por escrito, anotándolo en "Notas del presupuesto"','Hago el trabajo igualmente, la firma no es imprescindible'],a:1},
+  {s:'multimap',q:'Si el asegurado se lo tiene que pensar, ¿qué pasos sigo en Appcol?',o:['Dejo abierto el parte una semana','Selecciono PENDIENTE DE ACEPTACIÓN y queda cerrado automáticamente en Appcol e Infocol','Selecciono PENDIENTE DE ACEPTACIÓN y luego lo cierro por Infocol con PRESUPUESTO/AUTORIZACIÓN'],a:2},
+  {s:'multimap',q:'Si el cliente no está presente, ¿quién firma el presupuesto?',o:['Si el asegurado no firma, no realizaré el trabajo','Puede firmar otra persona autorizada por escrito, anotándolo en Notas del presupuesto','Hago el trabajo igualmente, la firma no es imprescindible'],a:1},
   {s:'multimap',q:'¿Qué precios debo usar para calcular un presupuesto de asistencia?',o:['La tarifa de CLIENTE','La tarifa de PROVEEDOR','El precio de mercado'],a:0},
   {s:'multimap',q:'¿Qué hago si un cliente no tiene correo electrónico?',o:['Dejo el correo en blanco; Multimap lo envía por correo ordinario','Anoto mi correo y continúo haciendo el presupuesto por APPCOL','Hago el presupuesto en papel y lo entrego'],a:0},
   {s:'font',q:'¿Está cubierta la rotura de tuberías de riego?',o:['Sí, si la tubería es particular','No, si solo es de riego'],a:1},
@@ -223,7 +392,7 @@ const ALL_Q=[
   {s:'font',q:'¿Qué incluye el servicio de sellado?',o:['Fregaderos, sanitarios, bañeras y platos de ducha','Sanitarios, bañeras y platos de ducha','Sanitarios, bañeras, platos de ducha y mamparas de baño'],a:1},
   {s:'font',q:'¿Qué tuberías entran en la garantía de atascos?',o:['Desagües de aparatos y bajantes de la vivienda o edificio','Desagües de aparatos y de A/A, arquetas y bajantes incluso unión con el canalón','Desagües de aparatos y de A/A, arquetas, bajantes, canalones y sumideros'],a:1},
   {s:'font',q:'¿Cuántas intervenciones puedo hacer en una vivienda?',o:['Una en viviendas, en comunidades hasta el límite contratado y hogar selección sin límite','Una en viviendas y comunidades; hogar selección sin límite','En viviendas las que solicite el cliente; en comunidades hasta el límite contratado'],a:0},
-  {s:'alba',q:'¿Si hay elementos afectados por agua pero no por rotura de tubería?',o:['Se repara siempre si se ve afectado por agua','Si no estoy seguro, al ver daños tengo que reparar','No se repara; excluido por no provenir de instalación de agua'],a:2},
+  {s:'alba',q:'Si hay elementos afectados por agua pero no por rotura de tubería:',o:['Se repara siempre si se ve afectado por agua','Si no estoy seguro, al ver daños tengo que reparar','No se repara; excluido por no provenir de instalación de agua'],a:2},
   {s:'alba',q:'¿Qué reparamos cuando existe falta de mantenimiento?',o:['Nada; se indemniza el daño directo y ofrecemos asistencia para reparar con garantías','Intentamos hacer la reparación lo mejor posible','Nada, lo excluimos directamente'],a:0},
   {s:'alba',q:'¿Se aplican Daños Estéticos a perjudicados?',o:['Sí, en la estancia afectada','No, que lo reclamen a su compañía de seguros','Solo con autorización previa de la compañía; en primera instancia, no'],a:2},
   {s:'alba',q:'¿Se aplican Daños Estéticos en estancias distintas a la afectada?',o:['Solo en pólizas Hogar Platino; en el resto, solo la estancia afectada','Sí, pero solo cuando es el mismo material','No, en ningún caso'],a:0},
@@ -240,88 +409,108 @@ const ALL_Q=[
   {s:'crist',q:'¿Se cubren los golpes en un escaparate?',o:['No, los daños superficiales no están cubiertos','Sí, si pertenece al local asegurado','Sí, si afecta a una cara del vidrio'],a:0},
   {s:'tarifas',q:'¿Cuándo se utiliza el código base?',o:['Tantas veces como trabajos diferentes haya hecho','Solamente una vez por cada trabajo realizado a la vez','Se aplica junto con las visitas o para facturar una visita'],a:1},
   {s:'tarifas',q:'¿Debo facturar por pasar presupuesto?',o:['No facturo este concepto porque luego hago el trabajo','Sí, lo facturo como una visita','Solo se factura si el trabajo es muy grande'],a:0},
-  {s:'tarifas',q:'¿Cómo aplico códigos principales y secundarios?',o:['Aplico siempre códigos principales','Aplico el código principal de mayor importancia y el resto adicionales','Aplico siempre adicionales'],a:1},
+  {s:'tarifas',q:'¿Cómo aplico códigos principales y secundarios?',o:['Aplico siempre códigos principales','Aplico el código principal de mayor importancia y el resto adicionales','Aplico siempre adicionales'],a:1}
 ];
 
-const state={};
-SECTIONS.forEach(s=>{state[s.id]={score:0,total:ALL_Q.filter(q=>q.s===s.id).length,done:false,answers:[]};});
+var state={};
+SECS.forEach(function(s){state[s.id]={score:0,total:0,done:false,answers:[]};});
+QQ.forEach(function(q){state[q.s].total++;});
 
-let curSection=null,curQs=[],curIdx=0,curScore=0,curAnswers=[];
+var curSec='',curQs=[],curIdx=0,curScore=0,curAnswers=[];
 
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function show(id){
+  var all=document.querySelectorAll('.screen');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('active');
+  document.getElementById(id).classList.add('active');
+  adaptLayout();
+}
 
 function buildMenu(){
-  const body=document.getElementById('menu-body');
-  body.innerHTML='';
-  SECTIONS.forEach(sec=>{
-    const st=state[sec.id];
-    const btn=document.createElement('button');
+  var list=document.getElementById('menu-list');
+  list.innerHTML='';
+  for(var i=0;i<SECS.length;i++){
+    var sec=SECS[i], st=state[sec.id];
+    var btn=document.createElement('button');
     btn.className='menu-btn'+(st.done?' done':'');
-    btn.innerHTML=`<div class="mb-icon">${sec.icon}</div>
-      <div class="menu-info"><div class="menu-name">${sec.name}</div><div class="menu-count">${st.total} pregunta${st.total!==1?'s':''}</div></div>
-      <div class="menu-score ${st.done?'':'pending'}">${st.done?st.score+'/'+st.total:'—'}</div>
-      <div class="menu-arrow">${st.done?'✓':'›'}</div>`;
-    btn.onclick=()=>startSection(sec.id);
-    body.appendChild(btn);
-  });
-  buildScoreboard();
+    btn.innerHTML=
+      '<div class="mb-top">'+
+        '<div class="mb-ico">'+sec.icon+'</div>'+
+        '<div class="menu-arr'+(st.done?' done-arr':'')+'">'+( st.done?'✓':'›')+'</div>'+
+      '</div>'+
+      '<div class="menu-name">'+sec.name+'</div>'+
+      '<div class="menu-bottom">'+
+        '<div class="menu-qs">'+st.total+' preguntas</div>'+
+        '<div class="menu-sc '+(st.done?'':'pend')+'">'+(st.done?st.score+'/'+st.total:'—')+'</div>'+
+      '</div>';
+    (function(id){btn.onclick=function(){startSec(id);};})(sec.id);
+    list.appendChild(btn);
+  }
+  buildSF();
 }
 
-function buildScoreboard(){
-  const grid=document.getElementById('sf-grid');
+function buildSF(){
+  var grid=document.getElementById('sf-grid');
   grid.innerHTML='';
-  let totalScore=0,totalDoneQ=0,doneCount=0;
-  SECTIONS.forEach(sec=>{
-    const st=state[sec.id];
-    if(st.done){totalScore+=st.score;totalDoneQ+=st.total;doneCount++;}
-    const cell=document.createElement('div');
-    cell.className='sf-cell'+(st.done?' done-cell':'');
-    cell.innerHTML=`<div class="sf-sec">${sec.name}</div><div class="sf-val ${st.done?'done-val':''}">${st.done?st.score+'/'+st.total:'—'}</div>`;
-    grid.appendChild(cell);
-  });
-  const tv=document.getElementById('sf-total-val');
-  tv.textContent=doneCount===0?'—':totalScore+'/'+totalDoneQ+(doneCount===SECTIONS.length?' ✓':'');
+  var totSc=0,totQ=0,doneN=0;
+  for(var i=0;i<SECS.length;i++){
+    var sec=SECS[i],st=state[sec.id];
+    if(st.done){totSc+=st.score;totQ+=st.total;doneN++;}
+    var c=document.createElement('div');
+    c.className='sf-cell'+(st.done?' ok':'');
+    c.innerHTML='<div class="sf-cn">'+sec.name+'</div><div class="sf-cv'+(st.done?' ok':'')+'">'+( st.done?st.score+'/'+st.total:'—')+'</div>';
+    grid.appendChild(c);
+  }
+  document.getElementById('sf-tv').textContent=doneN===0?'—':totSc+'/'+totQ+(doneN===SECS.length?' ✓':'');
 }
 
-function startSection(secId){
-  curSection=secId; curQs=ALL_Q.filter(q=>q.s===secId);
+function startSec(id){
+  curSec=id; curQs=[];
+  for(var i=0;i<QQ.length;i++){if(QQ[i].s===id)curQs.push(QQ[i]);}
   curIdx=0;curScore=0;curAnswers=[];
-  const sec=SECTIONS.find(s=>s.id===secId);
-  document.getElementById('quiz-section-title').textContent=sec.name;
+  var sec=null;
+  for(var i=0;i<SECS.length;i++){if(SECS[i].id===id){sec=SECS[i];break;}}
+  document.getElementById('q-sec-title').textContent=sec.name;
   document.getElementById('sec-pill').textContent=sec.name;
-  show('scr-quiz'); renderQ();
+  show('scr-quiz');
+  renderQ();
 }
 
 function renderQ(){
-  const q=curQs[curIdx],total=curQs.length;
-  document.getElementById('prog-fill').style.width=((curIdx/total)*100)+'%';
+  var q=curQs[curIdx],total=curQs.length;
+  document.getElementById('prog-fill').style.width=Math.round((curIdx/total)*100)+'%';
   document.getElementById('prog-txt').textContent='Pregunta '+(curIdx+1)+' de '+total;
-  document.getElementById('prog-score').textContent=curScore+' correctas';
+  document.getElementById('prog-sc').textContent=curScore+' correctas';
   document.getElementById('q-text').textContent=q.q;
-  document.getElementById('fb').className='fb';
+  var fb=document.getElementById('fb');
+  fb.className='fb';fb.textContent='';
   document.getElementById('next-btn').style.display='none';
   document.getElementById('quiz-body').scrollTop=0;
-  const opts=document.getElementById('options');
+  var opts=document.getElementById('opts');
   opts.innerHTML='';
-  q.o.forEach((o,i)=>{
-    const b=document.createElement('button');
-    b.className='opt'; b.textContent=String.fromCharCode(97+i)+') '+o;
-    b.onclick=()=>pick(i); opts.appendChild(b);
-  });
+  for(var i=0;i<q.o.length;i++){
+    var b=document.createElement('button');
+    b.className='opt';
+    b.textContent=String.fromCharCode(97+i)+') '+q.o[i];
+    (function(idx){b.onclick=function(){pick(idx);};})(i);
+    opts.appendChild(b);
+  }
 }
 
 function pick(i){
-  const q=curQs[curIdx];
-  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
-  const fb=document.getElementById('fb'),nb=document.getElementById('next-btn');
+  var q=curQs[curIdx];
+  var btns=document.querySelectorAll('.opt');
+  for(var k=0;k<btns.length;k++) btns[k].disabled=true;
+  var fb=document.getElementById('fb');
+  var nb=document.getElementById('next-btn');
   if(i===q.a){
-    document.querySelectorAll('.opt')[i].className='opt correct';
-    fb.className='fb show ok'; fb.textContent='✓ ¡Correcto!'; curScore++;
+    btns[i].className='opt correct';
+    fb.className='fb show ok';fb.textContent='✓ ¡Correcto!';
+    curScore++;
     curAnswers.push({q:q.q,ok:true,chosen:i,ans:q.a,opts:q.o});
   } else {
-    document.querySelectorAll('.opt')[i].className='opt wrong';
-    document.querySelectorAll('.opt')[q.a].className='opt reveal';
-    fb.className='fb show ko'; fb.textContent='✗ Incorrecto. Correcta: '+String.fromCharCode(97+q.a)+') '+q.o[q.a];
+    btns[i].className='opt wrong';
+    btns[q.a].className='opt reveal';
+    fb.className='fb show ko';fb.textContent='✗ Incorrecto. Correcta: '+String.fromCharCode(97+q.a)+') '+q.o[q.a];
     curAnswers.push({q:q.q,ok:false,chosen:i,ans:q.a,opts:q.o});
   }
   nb.style.display='block';
@@ -331,33 +520,42 @@ function pick(i){
 function nextQ(){curIdx++;if(curIdx>=curQs.length)showResult();else renderQ();}
 
 function showResult(){
-  state[curSection].score=curScore; state[curSection].done=true; state[curSection].answers=curAnswers;
-  const total=curQs.length,pct=Math.round((curScore/total)*100);
-  const sec=SECTIONS.find(s=>s.id===curSection);
-  document.getElementById('res-section-title').textContent=sec.name+' — Resultado';
-  document.getElementById('sc-num').textContent=curScore+'/'+total;
+  state[curSec].score=curScore;state[curSec].done=true;state[curSec].answers=curAnswers;
+  var total=curQs.length,pct=Math.round((curScore/total)*100);
+  var sec=null;
+  for(var i=0;i<SECS.length;i++){if(SECS[i].id===curSec){sec=SECS[i];break;}}
+  document.getElementById('res-title').textContent=sec.name;
+  document.getElementById('sc-n').textContent=curScore+'/'+total;
   document.getElementById('sc-pct').textContent=pct+'%';
   document.getElementById('sc-msg').textContent=pct>=80?'¡Excelente! Superado con éxito.':pct>=60?'Buen trabajo, repasa algunas respuestas.':'Necesitas repasar este apartado.';
-  const wrong=curAnswers.filter(a=>!a.ok);
-  const rt=document.getElementById('rev-title'),rl=document.getElementById('rev-list');
+  var wrong=[];
+  for(var i=0;i<curAnswers.length;i++){if(!curAnswers[i].ok)wrong.push(curAnswers[i]);}
+  var rt=document.getElementById('rev-ttl'),rl=document.getElementById('rev-list');
   rl.innerHTML='';
   rt.textContent=wrong.length===0?'✓ ¡Sin errores en este apartado!':'Respuestas incorrectas ('+wrong.length+')';
-  wrong.forEach(a=>{
-    const d=document.createElement('div'); d.className='rev-item';
-    d.innerHTML='<div class="rev-q">'+a.q+'</div><div class="rev-w">✗ Tu respuesta: '+String.fromCharCode(97+a.chosen)+') '+a.opts[a.chosen]+'</div><div class="rev-r">✓ Correcta: '+String.fromCharCode(97+a.ans)+') '+a.opts[a.ans]+'</div>';
+  for(var i=0;i<wrong.length;i++){
+    var a=wrong[i],d=document.createElement('div');
+    d.className='rev-item';
+    d.innerHTML='<div class="rev-q">'+a.q+'</div>'
+      +'<div class="rev-w">✗ Tu respuesta: '+String.fromCharCode(97+a.chosen)+') '+a.opts[a.chosen]+'</div>'
+      +'<div class="rev-r">✓ Correcta: '+String.fromCharCode(97+a.ans)+') '+a.opts[a.ans]+'</div>';
     rl.appendChild(d);
-  });
+  }
   show('scr-result');
 }
 
-function retrySection(){startSection(curSection);}
+function retrySection(){startSec(curSec);}
 function goMenu(){buildMenu();show('scr-menu');}
 function resetAll(){
   if(!confirm('¿Reiniciar todas las puntuaciones?'))return;
-  SECTIONS.forEach(s=>{state[s.id]={score:0,total:ALL_Q.filter(q=>q.s===s.id).length,done:false,answers:[]};});
-  buildMenu(); show('scr-menu');
+  for(var i=0;i<SECS.length;i++){
+    var id=SECS[i].id;
+    state[id]={score:0,total:state[id].total,done:false,answers:[]};
+  }
+  buildMenu();show('scr-menu');
 }
 
+adaptLayout();
 buildMenu();
 </script>
 </body>
