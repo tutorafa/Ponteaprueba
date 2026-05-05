@@ -236,44 +236,10 @@ body{
 
   <div id="menu-right" style="display:contents;">
     <div class="menu-scroll" id="menu-list"></div>
-    <div id="sf-bottom" style="padding:14px 14px 18px;background:#fff;border-top:1px solid #eee;">
-      <div id="stats-card" style="background:#fff;border:2px solid #e0e0e0;border-radius:18px;padding:18px 16px 16px;width:100%;">
-        <div style="text-align:center;font-size:15px;font-weight:800;color:#1a1a1a;letter-spacing:.03em;margin-bottom:14px;">Resultados</div>
-        <!-- círculo de progreso -->
-        <div style="display:flex;justify-content:center;margin-bottom:16px;">
-          <div style="position:relative;width:80px;height:80px;">
-            <svg width="80" height="80" viewBox="0 0 80 80">
-              <circle cx="40" cy="40" r="34" fill="none" stroke="#f0f0f0" stroke-width="8"/>
-              <circle id="prog-circle" cx="40" cy="40" r="34" fill="none" stroke="#ED1C24" stroke-width="8"
-                stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"
-                transform="rotate(-90 40 40)" style="transition:stroke-dashoffset .5s ease;"/>
-            </svg>
-            <div style="position:absolute;top:0;left:0;width:80px;height:80px;display:flex;align-items:center;justify-content:center;">
-              <span id="circle-label" style="font-size:16px;font-weight:800;color:#1a1a1a;">0/0</span>
-            </div>
-          </div>
-        </div>
-        <!-- separador "Respuestas" -->
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-          <div style="flex:1;height:1.5px;background:#e0e0e0;"></div>
-          <span style="font-size:12px;font-weight:700;color:#888;white-space:nowrap;">Respuestas</span>
-          <div style="flex:1;height:1.5px;background:#e0e0e0;"></div>
-        </div>
-        <!-- stats row -->
-        <div style="display:flex;justify-content:space-between;text-align:center;">
-          <div>
-            <div style="font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;">Respondidas</div>
-            <div id="stat-answered" style="font-size:22px;font-weight:800;color:#1a1a1a;">0</div>
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;">Correctas</div>
-            <div id="stat-correct" style="font-size:22px;font-weight:800;color:#2e7d32;">0</div>
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;">Pendientes</div>
-            <div id="stat-pending" style="font-size:22px;font-weight:800;color:#ED1C24;">0</div>
-          </div>
-        </div>
+    <div class="sf" id="sf-bottom">
+      <div class="sf-total" style="width:100%;">
+        <span class="sf-tl">Puntuación total</span>
+        <span class="sf-tv" id="sf-tv">—</span>
       </div>
     </div>
   </div>
