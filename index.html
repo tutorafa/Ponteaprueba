@@ -164,7 +164,17 @@ body{
 .prog-fill{height:5px;border-radius:99px;background:#fff;transition:width .35s ease;}
 .prog-row{display:flex;justify-content:space-between;color:rgba(255,255,255,.85);font-size:11px;margin-top:5px;}
 .quiz-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px 10px;}
-.sec-pill{display:inline-block;background:#FDE8E9;color:#B8141A;font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;margin-bottom:12px;}
+.sec-pill{display:inline-block;background:#FDE8E9;color:#B8141A;font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;margin-bottom:10px;}
+/* barra de progreso de preguntas */
+.q-prog-wrap{margin-bottom:14px;}
+.q-prog-labels{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#888;margin-bottom:5px;}
+.q-prog-track{background:#f0f0f0;border-radius:99px;height:8px;overflow:hidden;}
+.q-prog-bar{height:8px;border-radius:99px;background:#ED1C24;transition:width .35s ease;}
+.q-prog-steps{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;}
+.q-step{flex:1;min-width:10px;height:6px;border-radius:3px;background:#e0e0e0;}
+.q-step.done-ok{background:#2e7d32;}
+.q-step.done-ko{background:#c62828;}
+.q-step.current{background:#ED1C24;}
 .q-text{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.5;margin-bottom:16px;}
 .opt{
   display:block;width:100%;text-align:left;
@@ -176,10 +186,10 @@ body{
 .opt.wrong{background:#fdecea;border-color:#c62828;color:#7f0000;}
 .opt.reveal{background:#e6f4ea;border-color:#2e7d32;color:#1b5e20;}
 .opt:disabled{cursor:default;}
-.fb{border-radius:10px;padding:11px 14px;font-size:14px;font-weight:600;display:none;margin-top:4px;}
+.fb{border-radius:12px;padding:14px 18px;font-size:17px;font-weight:700;display:none;margin-top:6px;text-align:center;width:100%;}
 .fb.show{display:block;}
-.fb.ok{background:#e6f4ea;color:#1b5e20;}
-.fb.ko{background:#fdecea;color:#7f0000;}
+.fb.ok{background:#e6f4ea;color:#1b5e20;border:2px solid #2e7d32;}
+.fb.ko{background:#fdecea;color:#7f0000;border:2px solid #c62828;}
 .quiz-foot{flex-shrink:0;padding:10px 14px 20px;}
 .next-btn{width:100%;padding:16px;border-radius:14px;background:#ED1C24;color:#fff;border:none;font-size:16px;font-weight:700;cursor:pointer;display:none;font-family:inherit;}
 .next-btn:active{background:#B8141A;}
@@ -227,9 +237,7 @@ body{
   <div id="menu-right" style="display:contents;">
     <div class="menu-scroll" id="menu-list"></div>
     <div class="sf" id="sf-bottom">
-      <div class="sf-ttl">Progreso y puntuaciones</div>
-      <div class="sf-grid" id="sf-grid"></div>
-      <div class="sf-total">
+      <div class="sf-total" style="width:100%;">
         <span class="sf-tl">Puntuación total</span>
         <span class="sf-tv" id="sf-tv">—</span>
       </div>
@@ -258,6 +266,13 @@ body{
   <div id="quiz-right">
     <div class="quiz-body" id="quiz-body">
       <div class="sec-pill" id="sec-pill"></div>
+      <div class="q-prog-wrap" id="q-prog-wrap">
+        <div class="q-prog-labels">
+          <span id="prog-label-left"></span>
+          <span id="prog-label-right"></span>
+        </div>
+        <div class="q-prog-track"><div class="q-prog-bar" id="q-prog-bar"></div></div>
+      </div>
       <div class="q-text" id="q-text"></div>
       <div id="opts"></div>
       <div class="fb" id="fb"></div>
@@ -346,14 +361,14 @@ function adaptLayout(){
 window.addEventListener('resize', function(){adaptLayout();});
 
 var SECS=[
-  {id:'conceptos', name:'Conceptos básicos', icon:'🎯'},
-  {id:'aplic',     name:'Aplicaciones',      icon:'📱'},
-  {id:'multimap',  name:'Multimap',          icon:'💶'},
-  {id:'font',      name:'Cob. Fontanería',   icon:'🔧'},
-  {id:'alba',      name:'Cob. Albañilería',  icon:'🏗️'},
-  {id:'elec',      name:'Daños Eléctricos',  icon:'⚡'},
-  {id:'crist',     name:'Cristalería',       icon:'🪟'},
-  {id:'tarifas',   name:'Tarifas',           icon:'📋'}
+  {id:'conceptos', name:'Conceptos básicos',     icon:'🎯'},
+  {id:'aplic',     name:'Aplicaciones',           icon:'📱'},
+  {id:'multimap',  name:'Multimap',               icon:'💶'},
+  {id:'tarifas',   name:'Tarifas',                icon:'📋'},
+  {id:'font',      name:'Coberturas fontanería',  icon:'🔧'},
+  {id:'alba',      name:'Coberturas albañilería', icon:'🏗️'},
+  {id:'elec',      name:'Daños eléctricos',       icon:'⚡'},
+  {id:'crist',     name:'Cristalería',            icon:'🪟'}
 ];
 
 var QQ=[
@@ -449,16 +464,10 @@ function buildMenu(){
 }
 
 function buildSF(){
-  var grid=document.getElementById('sf-grid');
-  grid.innerHTML='';
   var totSc=0,totQ=0,doneN=0;
   for(var i=0;i<SECS.length;i++){
-    var sec=SECS[i],st=state[sec.id];
+    var st=state[SECS[i].id];
     if(st.done){totSc+=st.score;totQ+=st.total;doneN++;}
-    var c=document.createElement('div');
-    c.className='sf-cell'+(st.done?' ok':'');
-    c.innerHTML='<div class="sf-cn">'+sec.name+'</div><div class="sf-cv'+(st.done?' ok':'')+'">'+( st.done?st.score+'/'+st.total:'—')+'</div>';
-    grid.appendChild(c);
   }
   document.getElementById('sf-tv').textContent=doneN===0?'—':totSc+'/'+totQ+(doneN===SECS.length?' ✓':'');
 }
@@ -477,9 +486,17 @@ function startSec(id){
 
 function renderQ(){
   var q=curQs[curIdx],total=curQs.length;
+  /* header progress bar */
   document.getElementById('prog-fill').style.width=Math.round((curIdx/total)*100)+'%';
   document.getElementById('prog-txt').textContent='Pregunta '+(curIdx+1)+' de '+total;
   document.getElementById('prog-sc').textContent=curScore+' correctas';
+  /* in-body progress bar */
+  document.getElementById('prog-label-left').textContent='Pregunta '+(curIdx+1)+' de '+total;
+  document.getElementById('prog-label-right').textContent=(total-curIdx-1)+' restantes';
+  document.getElementById('q-prog-bar').style.width=Math.round(((curIdx+1)/total)*100)+'%';
+  /* step dots */
+  var steps=document.getElementById('q-prog-steps');
+  if(steps) steps.innerHTML='';
   document.getElementById('q-text').textContent=q.q;
   var fb=document.getElementById('fb');
   fb.className='fb';fb.textContent='';
