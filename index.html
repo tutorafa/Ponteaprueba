@@ -3,118 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ED1C24">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ponte a Prueba">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-512.png">
 <title>Ponte a Prueba</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#ED1C24;min-height:100vh;display:flex;justify-content:center;align-items:center;}
-#app{width:100%;max-width:480px;min-height:100vh;background:#fff;display:flex;flex-direction:column;}
-@media(min-width:768px){
-  body{align-items:center;}
-  #app{width:90vw;max-width:1100px;height:calc(90vw * 9/16);max-height:90vh;min-height:unset;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.45);flex-direction:row;}
-  #scr-menu{flex-direction:row;}
-  #menu-left{width:280px;min-width:230px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;}
-  #menu-left .hdr{background:transparent;padding:22px 20px 16px;}
-  #menu-left .hdr-title{font-size:20px;}
-  #menu-right{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-  #menu-list{flex:1;overflow-y:auto;padding:16px 16px 8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;}
-  .menu-btn{margin-bottom:0!important;}
-  #sf-bottom{padding:14px 16px 18px;}
-  #scr-quiz{flex-direction:row;}
-  #quiz-left{width:260px;min-width:200px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;}
-  #quiz-right{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-  .quiz-body{flex:1;overflow-y:auto;padding:20px 22px 10px;}
-  .quiz-foot{padding:10px 22px 18px;}
-  #scr-result{flex-direction:row;}
-  #res-left{width:260px;min-width:200px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;}
-  #res-right{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-  #res-body{padding:20px 22px;}
-  #res-foot{padding:10px 22px 18px;}
-  .q-text{font-size:17px;}
-  .opt{font-size:15px;padding:13px 16px;}
-  .menu-name{font-size:15px;}
-}
-.hdr{background:#ED1C24;padding:14px 16px 12px;flex-shrink:0;}
+#app{width:100%;max-width:480px;min-height:100vh;background:#f0f0f0;display:flex;flex-direction:column;}
+
+/* ── HEADER ── */
+.hdr{background:#ED1C24;padding:14px 16px 14px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.25);}
 .hdr-row{display:flex;align-items:center;gap:10px;}
-.hdr-icon{font-size:30px;line-height:1;flex-shrink:0;}
+.hdr-logo{width:42px;height:42px;flex-shrink:0;}
 .hdr-texts{flex:1;}
 .hdr-title{color:#fff;font-size:19px;font-weight:800;letter-spacing:.04em;display:block;line-height:1.2;}
-.hdr-sub{color:rgba(255,255,255,.75);font-size:11px;letter-spacing:.05em;display:block;margin-top:2px;}
-.reset-btn{background:rgba(255,255,255,.25);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.back-btn{background:rgba(255,255,255,.25);border:none;color:#fff;font-size:13px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;}
+.hdr-sub{color:rgba(255,255,255,.8);font-size:11px;letter-spacing:.05em;display:block;margin-top:1px;}
+.reset-btn{background:rgba(255,255,255,.2);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.back-btn{background:rgba(255,255,255,.2);border:none;color:#fff;font-size:13px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;}
+
+/* ── SCREENS ── */
 .screen{display:none;flex-direction:column;flex:1;}
 .screen.active{display:flex;}
 
-/* ── MENU ── */
-.menu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 12px 8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;}
-.menu-btn{display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:100%;padding:14px 12px;border-radius:14px;border:2px solid #e8e8e8;background:#fff;cursor:pointer;text-align:left;}
-.menu-btn.done{border-color:#2e7d32;background:#f0faf0;}
-.menu-btn.done .mb-ico{background:#2e7d32;}
+/* ══ MENU ══ */
+.menu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 12px 4px;}
+.menu-group{margin-bottom:14px;}
+.group-label{font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;padding-left:2px;}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.menu-btn{
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  width:100%;padding:14px 12px 12px;border-radius:16px;
+  border:none;background:#fff;cursor:pointer;text-align:left;
+  box-shadow:0 2px 8px rgba(0,0,0,.10);
+  transition:transform .1s;
+}
+.menu-btn:active{transform:scale(.97);}
+.menu-btn.done{background:#f0faf0;}
 .mb-top{display:flex;align-items:center;justify-content:space-between;width:100%;}
-.mb-ico{width:38px;height:38px;border-radius:10px;background:#ED1C24;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;}
-.menu-arr{font-size:18px;color:#ccc;}
-.menu-arr.done-arr{color:#2e7d32;}
-.menu-name{font-size:14px;font-weight:800;color:#1a1a1a;line-height:1.2;}
-.menu-bottom{display:flex;justify-content:space-between;align-items:center;width:100%;}
-.menu-qs{font-size:11px;color:#888;}
-.menu-sc{font-size:13px;font-weight:700;color:#2e7d32;}
-.menu-sc.pend{color:#bbb;}
+/* círculo de progreso en icono */
+.mb-circle{position:relative;width:44px;height:44px;flex-shrink:0;}
+.mb-circle svg{position:absolute;top:0;left:0;}
+.mb-emoji{position:absolute;top:0;left:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.mb-check{font-size:16px;color:#2e7d32;font-weight:700;}
+.mb-arr{font-size:16px;color:#ccc;}
+.menu-name{font-size:13px;font-weight:800;color:#1a1a1a;line-height:1.3;}
+.menu-qs{font-size:11px;color:#888;margin-top:1px;}
 
-/* stats card */
-#sf-bottom{padding:14px 12px 20px;background:#fff;}
-#stats-card{background:#fff;border:2px solid #e0e0e0;border-radius:18px;padding:18px 16px 16px;width:100%;}
-.sc-title{text-align:center;font-size:15px;font-weight:800;color:#1a1a1a;letter-spacing:.03em;margin-bottom:14px;}
+/* ── STATS CARD ── */
+#sf-bottom{padding:0 12px 20px;}
+#stats-card{
+  background:#fff;border-radius:20px;padding:18px 16px 18px;width:100%;
+  box-shadow:0 2px 10px rgba(0,0,0,.10);
+}
+.sc-title{text-align:center;font-size:16px;font-weight:800;color:#1a1a1a;margin-bottom:16px;}
 .sc-circle-wrap{display:flex;justify-content:center;margin-bottom:16px;}
 .sc-sep{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
-.sc-sep-line{flex:1;height:1.5px;background:#e0e0e0;}
-.sc-sep-txt{font-size:12px;font-weight:700;color:#888;white-space:nowrap;}
-.sc-row{display:flex;justify-content:space-between;text-align:center;}
-.sc-col{}
-.sc-col-lbl{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;}
+.sc-sep-line{flex:1;height:1.5px;background:#e8e8e8;}
+.sc-sep-txt{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+.sc-row{display:flex;justify-content:space-between;align-items:flex-start;text-align:center;gap:4px;}
+.sc-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.sc-col-icon{font-size:22px;}
+.sc-col-lbl{font-size:9px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;}
 .sc-col-val{font-size:22px;font-weight:800;color:#1a1a1a;}
 .sc-col-val.green{color:#2e7d32;}
 .sc-col-val.red{color:#ED1C24;}
 
-/* ── QUIZ ── */
+/* ══ QUIZ ══ */
 .quiz-sub{margin-top:8px;}
-.prog-bg{background:rgba(255,255,255,.35);border-radius:99px;height:5px;}
-.prog-fill{height:5px;border-radius:99px;background:#fff;transition:width .35s ease;}
-.prog-row{display:flex;justify-content:space-between;color:rgba(255,255,255,.85);font-size:11px;margin-top:5px;}
-.quiz-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px 10px;}
+.prog-bg{background:rgba(255,255,255,.3);border-radius:99px;height:4px;}
+.prog-fill{height:4px;border-radius:99px;background:#fff;transition:width .35s;}
+.prog-row{display:flex;justify-content:space-between;color:rgba(255,255,255,.85);font-size:11px;margin-top:4px;}
+.quiz-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px 10px;background:#f0f0f0;}
 .sec-pill{display:inline-block;background:#FDE8E9;color:#B8141A;font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;margin-bottom:10px;}
 .q-prog-labels{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#888;margin-bottom:5px;}
-.q-prog-track{background:#e0e0e0;border-radius:99px;height:8px;overflow:hidden;margin-bottom:14px;}
-.q-prog-bar{height:8px;border-radius:99px;background:#aaa;transition:width .35s ease;}
+.q-prog-track{background:#e0e0e0;border-radius:99px;height:7px;overflow:hidden;margin-bottom:16px;}
+.q-prog-bar{height:7px;border-radius:99px;background:#bbb;transition:width .35s;}
 .q-text{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.5;margin-bottom:16px;}
-.opt{display:block;width:100%;text-align:left;padding:13px 16px;border:2px solid #e0e0e0;border-radius:12px;background:#fff;color:#1a1a1a;font-size:14px;line-height:1.4;cursor:pointer;margin-bottom:9px;-webkit-appearance:none;font-family:inherit;}
-.opt.correct{background:#e6f4ea;border-color:#2e7d32;color:#1b5e20;}
-.opt.wrong{background:#fdecea;border-color:#c62828;color:#7f0000;}
-.opt.reveal{background:#e6f4ea;border-color:#2e7d32;color:#1b5e20;}
+.opt{
+  display:block;width:100%;text-align:left;padding:13px 16px;
+  border:none;border-radius:14px;background:#fff;color:#1a1a1a;
+  font-size:14px;line-height:1.4;cursor:pointer;margin-bottom:9px;
+  -webkit-appearance:none;font-family:inherit;
+  box-shadow:0 2px 6px rgba(0,0,0,.09);
+}
+.opt:active:not(:disabled){transform:scale(.985);}
+.opt.correct{background:#e6f4ea;border:2px solid #2e7d32;color:#1b5e20;}
+.opt.wrong{background:#fdecea;border:2px solid #c62828;color:#7f0000;}
+.opt.reveal{background:#e6f4ea;border:2px solid #2e7d32;color:#1b5e20;}
 .opt:disabled{cursor:default;}
-.fb{border-radius:12px;padding:14px 18px;font-size:17px;font-weight:700;display:none;margin-top:6px;text-align:center;width:100%;}
+.fb{border-radius:14px;padding:14px 18px;font-size:17px;font-weight:700;display:none;margin-top:4px;text-align:center;width:100%;}
 .fb.show{display:block;}
 .fb.ok{background:#e6f4ea;color:#1b5e20;border:2px solid #2e7d32;}
 .fb.ko{background:#fdecea;color:#7f0000;border:2px solid #c62828;}
-.quiz-foot{flex-shrink:0;padding:10px 14px 20px;}
-.next-btn{width:100%;padding:16px;border-radius:14px;background:#ED1C24;color:#fff;border:none;font-size:16px;font-weight:700;cursor:pointer;display:none;font-family:inherit;}
+.quiz-foot{flex-shrink:0;padding:10px 14px 20px;background:#f0f0f0;}
+.next-btn{width:100%;padding:16px;border-radius:14px;background:#ED1C24;color:#fff;border:none;font-size:16px;font-weight:700;cursor:pointer;display:none;font-family:inherit;box-shadow:0 3px 10px rgba(237,28,36,.4);}
 .next-btn:active{background:#B8141A;}
 
-/* ── RESULT ── */
-#res-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px;}
-.score-card{background:#ED1C24;border-radius:16px;padding:22px;text-align:center;margin-bottom:14px;}
-.sc-n{font-size:56px;font-weight:900;color:#fff;line-height:1;}
+/* ══ RESULT ══ */
+#res-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px;background:#f0f0f0;}
+.score-card{background:#ED1C24;border-radius:18px;padding:22px;text-align:center;margin-bottom:14px;box-shadow:0 4px 14px rgba(237,28,36,.35);}
+.sc-n{font-size:54px;font-weight:900;color:#fff;line-height:1;}
 .sc-of{font-size:13px;color:rgba(255,255,255,.8);margin-top:4px;}
 .sc-pct{font-size:22px;font-weight:800;color:#fff;margin-top:8px;}
-.sc-msg{font-size:13px;color:rgba(255,255,255,.85);margin-top:6px;line-height:1.4;}
+.sc-msg{font-size:13px;color:rgba(255,255,255,.85);margin-top:6px;}
 .rev-ttl{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:10px;}
-.rev-item{background:#f5f5f5;border-radius:12px;padding:10px 12px;margin-bottom:8px;}
+.rev-item{background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:8px;box-shadow:0 1px 5px rgba(0,0,0,.08);}
 .rev-q{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:5px;line-height:1.4;}
 .rev-w{font-size:12px;color:#c62828;margin-bottom:3px;}
 .rev-r{font-size:12px;color:#2e7d32;}
-#res-foot{flex-shrink:0;padding:10px 14px 24px;display:flex;gap:10px;}
+#res-foot{flex-shrink:0;padding:10px 14px 24px;display:flex;gap:10px;background:#f0f0f0;}
 .rbtn{flex:1;padding:15px;border-radius:14px;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
-.rbtn.pri{background:#ED1C24;color:#fff;}
-.rbtn.pri:active{background:#B8141A;}
-.rbtn.sec{background:#f0f0f0;color:#1a1a1a;border:2px solid #ddd;}
+.rbtn.pri{background:#ED1C24;color:#fff;box-shadow:0 3px 10px rgba(237,28,36,.35);}
+.rbtn.sec{background:#fff;color:#1a1a1a;box-shadow:0 2px 6px rgba(0,0,0,.1);}
+
+/* PC layout */
+@media(min-width:768px){
+  body{align-items:center;}
+  #app{width:90vw;max-width:1100px;height:calc(90vw*9/16);max-height:90vh;min-height:unset;border-radius:18px;overflow:hidden;box-shadow:0 10px 50px rgba(0,0,0,.5);flex-direction:row;}
+  #scr-menu,#scr-quiz,#scr-result{flex-direction:row;}
+}
 </style>
 </head>
 <body>
@@ -125,12 +137,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   <div id="menu-left">
     <div class="hdr">
       <div class="hdr-row">
-        <span class="hdr-icon">📝</span>
+        <svg class="hdr-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#ED1C24"/>
+          <!-- clipboard body -->
+          <rect x="22" y="28" width="56" height="52" rx="6" fill="none" stroke="#fff" stroke-width="5"/>
+          <!-- clip top -->
+          <rect x="38" y="20" width="24" height="14" rx="5" fill="none" stroke="#fff" stroke-width="4.5"/>
+          <!-- check circle -->
+          <circle cx="36" cy="48" r="9" fill="none" stroke="#fff" stroke-width="4"/>
+          <polyline points="30,48 34.5,53 42,43" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- lines -->
+          <line x1="50" y1="46" x2="68" y2="46" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          <line x1="50" y1="54" x2="64" y2="54" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          <!-- empty circles -->
+          <circle cx="36" cy="63" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
+          <line x1="45" y1="63" x2="65" y2="63" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="36" cy="74" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
+          <line x1="45" y1="74" x2="63" y2="74" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- question bubble -->
+          <circle cx="68" cy="70" r="13" fill="#fff"/>
+          <text x="68" y="75" text-anchor="middle" font-size="16" font-weight="900" fill="#ED1C24" font-family="Arial,sans-serif">?</text>
+        </svg>
         <div class="hdr-texts">
           <span class="hdr-title">PONTE A PRUEBA</span>
           <span class="hdr-sub">Cuestionario interactivo</span>
         </div>
-        <button class="reset-btn" onclick="resetAll()" title="Reiniciar todo">&#x21BA;</button>
+        <button class="reset-btn" onclick="resetAll()" title="Reiniciar">&#x21BA;</button>
       </div>
     </div>
   </div>
@@ -140,15 +172,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
       <div id="stats-card">
         <div class="sc-title">Mi resultado</div>
         <div class="sc-circle-wrap">
-          <div style="position:relative;width:90px;height:90px;">
-            <svg width="90" height="90" viewBox="0 0 90 90">
-              <circle cx="45" cy="45" r="38" fill="none" stroke="#f0f0f0" stroke-width="9"/>
-              <circle id="prog-circle" cx="45" cy="45" r="38" fill="none" stroke="#aaa" stroke-width="9"
-                stroke-linecap="round" stroke-dasharray="238.76" stroke-dashoffset="238.76"
-                transform="rotate(-90 45 45)" style="transition:stroke-dashoffset .6s ease,stroke .4s;"/>
+          <div style="position:relative;width:96px;height:96px;">
+            <svg width="96" height="96" viewBox="0 0 96 96">
+              <circle cx="48" cy="48" r="42" fill="none" stroke="#f0f0f0" stroke-width="10"/>
+              <circle id="prog-circle" cx="48" cy="48" r="42" fill="none" stroke="#e0e0e0" stroke-width="10"
+                stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"
+                transform="rotate(-90 48 48)" style="transition:stroke-dashoffset .6s ease,stroke .4s;"/>
             </svg>
-            <div style="position:absolute;top:0;left:0;width:90px;height:90px;display:flex;align-items:center;justify-content:center;">
-              <span id="circle-label" style="font-size:17px;font-weight:800;color:#1a1a1a;">—</span>
+            <div style="position:absolute;top:0;left:0;width:96px;height:96px;display:flex;align-items:center;justify-content:center;">
+              <span id="circle-label" style="font-size:18px;font-weight:800;color:#1a1a1a;">—</span>
             </div>
           </div>
         </div>
@@ -159,15 +191,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
         </div>
         <div class="sc-row">
           <div class="sc-col">
-            <div class="sc-col-lbl">Respondidas</div>
+            <div class="sc-col-icon">💬</div>
+            <div class="sc-col-lbl">Preguntas<br>respondidas</div>
             <div class="sc-col-val" id="stat-answered">—</div>
           </div>
           <div class="sc-col">
-            <div class="sc-col-lbl">Correctas</div>
+            <div class="sc-col-icon">✅</div>
+            <div class="sc-col-lbl">Respuestas<br>correctas</div>
             <div class="sc-col-val green" id="stat-correct">—</div>
           </div>
           <div class="sc-col">
-            <div class="sc-col-lbl">Resultado</div>
+            <div class="sc-col-icon">🏆</div>
+            <div class="sc-col-lbl">Puntuación<br>obtenida</div>
             <div class="sc-col-val" id="stat-result">—</div>
           </div>
         </div>
@@ -181,12 +216,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   <div id="quiz-left">
     <div class="hdr">
       <div class="hdr-row">
-        <span class="hdr-icon">📝</span>
+        <svg class="hdr-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#ED1C24"/>
+          <rect x="22" y="28" width="56" height="52" rx="6" fill="none" stroke="#fff" stroke-width="5"/>
+          <rect x="38" y="20" width="24" height="14" rx="5" fill="none" stroke="#fff" stroke-width="4.5"/>
+          <circle cx="36" cy="48" r="9" fill="none" stroke="#fff" stroke-width="4"/>
+          <polyline points="30,48 34.5,53 42,43" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="50" y1="46" x2="68" y2="46" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          <line x1="50" y1="54" x2="64" y2="54" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="36" cy="63" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
+          <line x1="45" y1="63" x2="65" y2="63" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="36" cy="74" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
+          <line x1="45" y1="74" x2="63" y2="74" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="68" cy="70" r="13" fill="#fff"/>
+          <text x="68" y="75" text-anchor="middle" font-size="16" font-weight="900" fill="#ED1C24" font-family="Arial,sans-serif">?</text>
+        </svg>
         <div class="hdr-texts">
           <span class="hdr-title" id="q-sec-title"></span>
           <span class="hdr-sub">Cuestionario interactivo</span>
         </div>
-        <button class="back-btn" id="back-to-menu-btn">← Menú</button>
+        <button class="back-btn" id="back-btn">← Menú</button>
       </div>
       <div class="quiz-sub">
         <div class="prog-bg"><div class="prog-fill" id="prog-fill"></div></div>
@@ -197,10 +246,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   <div id="quiz-right">
     <div class="quiz-body" id="quiz-body">
       <div class="sec-pill" id="sec-pill"></div>
-      <div class="q-prog-labels">
-        <span id="prog-label-left"></span>
-        <span id="prog-label-right"></span>
-      </div>
+      <div class="q-prog-labels"><span id="pl-left"></span><span id="pl-right"></span></div>
       <div class="q-prog-track"><div class="q-prog-bar" id="q-prog-bar"></div></div>
       <div class="q-text" id="q-text"></div>
       <div id="opts"></div>
@@ -217,10 +263,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   <div id="res-left">
     <div class="hdr">
       <div class="hdr-row">
-        <span class="hdr-icon">📝</span>
+        <svg class="hdr-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#ED1C24"/>
+          <rect x="22" y="28" width="56" height="52" rx="6" fill="none" stroke="#fff" stroke-width="5"/>
+          <rect x="38" y="20" width="24" height="14" rx="5" fill="none" stroke="#fff" stroke-width="4.5"/>
+          <circle cx="36" cy="48" r="9" fill="none" stroke="#fff" stroke-width="4"/>
+          <polyline points="30,48 34.5,53 42,43" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="50" y1="46" x2="68" y2="46" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          <line x1="50" y1="54" x2="64" y2="54" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="36" cy="63" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
+          <line x1="45" y1="63" x2="65" y2="63" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="36" cy="74" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
+          <line x1="45" y1="74" x2="63" y2="74" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="68" cy="70" r="13" fill="#fff"/>
+          <text x="68" y="75" text-anchor="middle" font-size="16" font-weight="900" fill="#ED1C24" font-family="Arial,sans-serif">?</text>
+        </svg>
         <div class="hdr-texts">
           <span class="hdr-title" id="res-title"></span>
-          <span class="hdr-sub">Cuestionario interactivo</span>
+          <span class="hdr-sub">Resultado del apartado</span>
         </div>
       </div>
     </div>
@@ -243,19 +303,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   </div>
 </div>
 
-</div>
-
+</div><!-- #app -->
 <script>
-var SECS=[
-  {id:'conceptos', name:'Conceptos básicos',     icon:'🎯'},
-  {id:'aplic',     name:'Aplicaciones',           icon:'📱'},
-  {id:'multimap',  name:'Multimap',               icon:'💶'},
-  {id:'tarifas',   name:'Tarifas',                icon:'📋'},
-  {id:'font',      name:'Coberturas fontanería',  icon:'🔧'},
-  {id:'alba',      name:'Coberturas albañilería', icon:'🏗️'},
-  {id:'elec',      name:'Daños eléctricos',       icon:'⚡'},
-  {id:'crist',     name:'Cristalería',            icon:'🪟'}
+/* ── SECTIONS ── */
+var GROUPS=[
+  {label:'', secs:[
+    {id:'conceptos', name:'Conceptos básicos', icon:'🎯'},
+    {id:'aplic',     name:'Aplicaciones',      icon:'📱'},
+    {id:'multimap',  name:'Multimap',          icon:'💶'},
+    {id:'tarifas',   name:'Tarifas',           icon:'📋'}
+  ]},
+  {label:'Coberturas', secs:[
+    {id:'font',  name:'Fontanería',   icon:'🔧'},
+    {id:'alba',  name:'Albañilería',  icon:'🏗️'},
+    {id:'crist', name:'Cristalería',  icon:'🪟'},
+    {id:'elec',  name:'Daños eléctricos', icon:'⚡'}
+  ]}
 ];
+var SECS=[];
+for(var g=0;g<GROUPS.length;g++) for(var s=0;s<GROUPS[g].secs.length;s++) SECS.push(GROUPS[g].secs[s]);
 
 var QQ=[
   {s:'conceptos',q:'¿Qué es una Asistencia?',o:['Trabajos no cubiertos por póliza y que PAGA EL CLIENTE','Trabajos cubiertos por póliza y que PAGA MAPFRE','Un siniestro excluido'],a:0},
@@ -275,7 +341,7 @@ var QQ=[
   {s:'aplic',q:'¿Cómo retraso un servicio para otro momento?',o:['Marcando Hito de Aplazamiento por Appcol','Por Retraso del Servicio en Appcol o por opción Aplazamiento en Infocol','Dejarlo pendiente de cliente hasta que llame'],a:1},
   {s:'multimap',q:'Las condiciones para la aplicación del IVA reducido son:',o:['Material no supera el 40% del total, no vivienda en alquiler y sin reforma en menos de dos años','A cualquier cliente si el material no supera el 40% del total','Que no sea vivienda en alquiler y tenga más de dos años, sin importar el importe'],a:0},
   {s:'multimap',q:'¿Cómo gestiono el pago de la Asistencia?',o:['En efectivo prioritariamente','Preferiblemente por recibo domiciliado o por tarjeta','A partir de 1.500€ con pago adelantado del cliente','La b y la c son correctas'],a:3},
-  {s:'multimap',q:'Si el asegurado se lo tiene que pensar, ¿qué pasos sigo en Appcol?',o:['Dejo abierto el parte una semana','Selecciono PENDIENTE DE ACEPTACIÓN y queda cerrado automáticamente en Appcol e Infocol','Selecciono PENDIENTE DE ACEPTACIÓN y luego lo cierro por Infocol con PRESUPUESTO/AUTORIZACIÓN'],a:2},
+  {s:'multimap',q:'Si el asegurado se lo tiene que pensar, ¿qué pasos sigo en Appcol?',o:['Dejo abierto el parte una semana','Selecciono PENDIENTE DE ACEPTACIÓN y queda cerrado automáticamente','Selecciono PENDIENTE DE ACEPTACIÓN y luego lo cierro por Infocol con PRESUPUESTO/AUTORIZACIÓN'],a:2},
   {s:'multimap',q:'Si el cliente no está presente, ¿quién firma el presupuesto?',o:['Si el asegurado no firma, no realizaré el trabajo','Puede firmar otra persona autorizada por escrito, anotándolo en Notas del presupuesto','Hago el trabajo igualmente, la firma no es imprescindible'],a:1},
   {s:'multimap',q:'¿Qué precios debo usar para calcular un presupuesto de asistencia?',o:['La tarifa de CLIENTE','La tarifa de PROVEEDOR','El precio de mercado'],a:0},
   {s:'multimap',q:'¿Qué hago si un cliente no tiene correo electrónico?',o:['Dejo el correo en blanco; Multimap lo envía por correo ordinario','Anoto mi correo y continúo haciendo el presupuesto por APPCOL','Hago el presupuesto en papel y lo entrego'],a:0},
@@ -313,13 +379,14 @@ var QQ=[
   {s:'crist',q:'¿Se cubren los golpes en un escaparate?',o:['No, los daños superficiales no están cubiertos','Sí, si pertenece al local asegurado','Sí, si afecta a una cara del vidrio'],a:0}
 ];
 
+/* ── STATE ── */
 var state={};
-for(var i=0;i<SECS.length;i++){state[SECS[i].id]={score:0,total:0,done:false,answers:[]};}
-for(var i=0;i<QQ.length;i++){state[QQ[i].s].total++;}
+for(var i=0;i<SECS.length;i++) state[SECS[i].id]={score:0,total:0,done:false,answers:[]};
+for(var i=0;i<QQ.length;i++) state[QQ[i].s].total++;
 
 var curSec='',curQs=[],curIdx=0,curScore=0,curAnswers=[];
 
-/* ── show screen ── */
+/* ── SCREEN ── */
 function show(id){
   var all=document.querySelectorAll('.screen');
   for(var i=0;i<all.length;i++) all[i].classList.remove('active');
@@ -327,66 +394,84 @@ function show(id){
   applyLayout();
 }
 
-/* ── responsive layout ── */
 function applyLayout(){
   var pc=window.innerWidth>=768;
   var mL=document.getElementById('menu-left');
   var mR=document.getElementById('menu-right');
-  var mList=document.getElementById('menu-list');
   var qL=document.getElementById('quiz-left');
   var qR=document.getElementById('quiz-right');
   var rL=document.getElementById('res-left');
   var rR=document.getElementById('res-right');
   if(pc){
     mL.style.cssText='width:280px;min-width:220px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;';
-    mR.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;';
-    mList.style.cssText='flex:1;overflow-y:auto;padding:16px 14px 8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;';
+    mR.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden;background:#f0f0f0;';
     qL.style.cssText='width:260px;min-width:200px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;';
-    qR.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;';
+    qR.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden;background:#f0f0f0;';
     rL.style.cssText='width:260px;min-width:200px;background:#ED1C24;display:flex;flex-direction:column;flex-shrink:0;';
-    rR.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;';
+    rR.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden;background:#f0f0f0;';
   } else {
     mL.style.cssText='';
     mR.style.cssText='display:contents;';
-    mList.style.cssText='flex:1;overflow-y:auto;padding:14px 12px 8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;';
-    qL.style.cssText='display:block;';
+    qL.style.cssText='';
     qR.style.cssText='display:flex;flex-direction:column;flex:1;overflow:hidden;';
     rL.style.cssText='display:none;';
     rR.style.cssText='display:flex;flex-direction:column;flex:1;overflow:hidden;';
   }
 }
-
 window.addEventListener('resize',applyLayout);
 
-/* ── back button ── */
-document.getElementById('back-to-menu-btn').addEventListener('click', function(){ goMenu(); });
+/* ── BACK BUTTON ── */
+document.getElementById('back-btn').addEventListener('click',function(){goMenu();});
 
-/* ── build menu ── */
+/* ── BUILD MENU ── */
 function buildMenu(){
   var list=document.getElementById('menu-list');
   list.innerHTML='';
-  for(var i=0;i<SECS.length;i++){
-    var sec=SECS[i],st=state[sec.id];
-    var btn=document.createElement('button');
-    btn.className='menu-btn'+(st.done?' done':'');
-    btn.innerHTML=
-      '<div class="mb-top">'+
-        '<div class="mb-ico">'+sec.icon+'</div>'+
-        '<div class="menu-arr'+(st.done?' done-arr':'')+'">'+( st.done?'✓':'›')+'</div>'+
-      '</div>'+
-      '<div class="menu-name">'+sec.name+'</div>'+
-      '<div class="menu-bottom">'+
-        '<div class="menu-qs">'+st.total+' preguntas</div>'+
-        '<div class="menu-sc '+(st.done?'':'pend')+'">'+(st.done?st.score+'/'+st.total:'—')+'</div>'+
-      '</div>';
-    (function(id){btn.onclick=function(){startSec(id);};})(sec.id);
-    list.appendChild(btn);
+  for(var g=0;g<GROUPS.length;g++){
+    var grp=GROUPS[g];
+    var grpDiv=document.createElement('div');
+    grpDiv.className='menu-group';
+    if(grp.label){
+      var lbl=document.createElement('div');
+      lbl.className='group-label';
+      lbl.textContent=grp.label;
+      grpDiv.appendChild(lbl);
+    }
+    var grid=document.createElement('div');
+    grid.className='menu-grid';
+    for(var s=0;s<grp.secs.length;s++){
+      var sec=grp.secs[s];
+      var st=state[sec.id];
+      var pct=st.done&&st.total>0?Math.round((st.score/st.total)*100):0;
+      var circ=2*Math.PI*18; // r=18
+      var offset=circ-(circ*(pct/100));
+      var strokeColor=st.done?(pct>=70?'#2e7d32':'#ED1C24'):'#e0e0e0';
+      var btn=document.createElement('button');
+      btn.className='menu-btn'+(st.done?' done':'');
+      btn.innerHTML=
+        '<div class="mb-top">'+
+          '<div class="mb-circle">'+
+            '<svg width="44" height="44" viewBox="0 0 44 44">'+
+              '<circle cx="22" cy="22" r="18" fill="'+(st.done?'#f9f9f9':'#f4f4f4')+'" stroke="#f0f0f0" stroke-width="3"/>'+
+              (st.done?'<circle cx="22" cy="22" r="18" fill="none" stroke="'+strokeColor+'" stroke-width="3" stroke-linecap="round" stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'" transform="rotate(-90 22 22)"/>':'')+
+            '</svg>'+
+            '<div class="mb-emoji">'+sec.icon+'</div>'+
+          '</div>'+
+          '<div class="'+(st.done?'mb-check':'mb-arr')+'">'+(st.done?'✓':'›')+'</div>'+
+        '</div>'+
+        '<div class="menu-name">'+sec.name+'</div>'+
+        '<div class="menu-qs">'+st.total+' preguntas'+(st.done?' ('+st.score+'/'+st.total+')':'')+'</div>';
+      (function(id){btn.onclick=function(){startSec(id);};})(sec.id);
+      grid.appendChild(btn);
+    }
+    grpDiv.appendChild(grid);
+    list.appendChild(grpDiv);
   }
-  updateStatsCard();
+  updateStats();
 }
 
-/* ── stats card ── */
-function updateStatsCard(){
+/* ── STATS ── */
+function updateStats(){
   var totalQ=0,answeredQ=0,correctQ=0;
   for(var i=0;i<SECS.length;i++){
     var st=state[SECS[i].id];
@@ -394,112 +479,94 @@ function updateStatsCard(){
     if(st.done){answeredQ+=st.total;correctQ+=st.score;}
   }
   var pct=answeredQ>0?Math.round((correctQ/answeredQ)*100):null;
-  var circumference=238.76;
+  var circ=263.9;
   var circle=document.getElementById('prog-circle');
   var label=document.getElementById('circle-label');
   if(pct===null){
-    circle.style.strokeDashoffset=circumference;
+    circle.style.strokeDashoffset=circ;
     circle.style.stroke='#e0e0e0';
     label.textContent='—';
   } else {
-    var offset=circumference-(circumference*(pct/100));
-    circle.style.strokeDashoffset=offset;
+    circle.style.strokeDashoffset=circ-(circ*(pct/100));
     circle.style.stroke=pct>=70?'#2e7d32':'#ED1C24';
     label.textContent=pct+'%';
   }
-  var pending=totalQ-answeredQ;
-  document.getElementById('stat-answered').textContent=answeredQ>0?answeredQ:'—';
-  document.getElementById('stat-correct').textContent=correctQ>0?correctQ:'—';
-  var resultEl=document.getElementById('stat-result');
-  if(answeredQ>0){
-    resultEl.textContent=correctQ+'/'+answeredQ;
-    resultEl.className='sc-col-val'+(pct>=70?' green':' red');
-  } else {
-    resultEl.textContent='—';
-    resultEl.className='sc-col-val';
-  }
+  document.getElementById('stat-answered').textContent=answeredQ||'—';
+  document.getElementById('stat-correct').textContent=correctQ||'—';
+  var rv=document.getElementById('stat-result');
+  if(answeredQ>0){rv.textContent=correctQ+'/'+answeredQ;rv.className='sc-col-val'+(pct>=70?' green':' red');}
+  else{rv.textContent='—';rv.className='sc-col-val';}
 }
 
-/* ── start section ── */
+/* ── START SECTION ── */
 function startSec(id){
   curSec=id;curQs=[];
-  for(var i=0;i<QQ.length;i++){if(QQ[i].s===id)curQs.push(QQ[i]);}
+  for(var i=0;i<QQ.length;i++) if(QQ[i].s===id) curQs.push(QQ[i]);
   curIdx=0;curScore=0;curAnswers=[];
   var sec=null;
-  for(var i=0;i<SECS.length;i++){if(SECS[i].id===id){sec=SECS[i];break;}}
+  for(var i=0;i<SECS.length;i++) if(SECS[i].id===id){sec=SECS[i];break;}
   document.getElementById('q-sec-title').textContent=sec.name;
   document.getElementById('sec-pill').textContent=sec.name;
-  show('scr-quiz');
-  renderQ();
+  show('scr-quiz');renderQ();
 }
 
-/* ── render question ── */
+/* ── RENDER Q ── */
 function renderQ(){
-  var q=curQs[curIdx],total=curQs.length;
-  document.getElementById('prog-fill').style.width=Math.round((curIdx/total)*100)+'%';
-  document.getElementById('prog-txt').textContent='Pregunta '+(curIdx+1)+' de '+total;
+  var q=curQs[curIdx],tot=curQs.length;
+  document.getElementById('prog-fill').style.width=Math.round((curIdx/tot)*100)+'%';
+  document.getElementById('prog-txt').textContent='Pregunta '+(curIdx+1)+' de '+tot;
   document.getElementById('prog-sc').textContent=curScore+' correctas';
-  document.getElementById('prog-label-left').textContent='Pregunta '+(curIdx+1)+' de '+total;
-  document.getElementById('prog-label-right').textContent=(total-curIdx-1)+' restantes';
-  document.getElementById('q-prog-bar').style.width=Math.round(((curIdx+1)/total)*100)+'%';
+  document.getElementById('pl-left').textContent='Pregunta '+(curIdx+1)+' de '+tot;
+  document.getElementById('pl-right').textContent=(tot-curIdx-1)+' restantes';
+  document.getElementById('q-prog-bar').style.width=Math.round(((curIdx+1)/tot)*100)+'%';
   document.getElementById('q-text').textContent=q.q;
-  var fb=document.getElementById('fb');
-  fb.className='fb';fb.textContent='';
+  var fb=document.getElementById('fb');fb.className='fb';fb.textContent='';
   document.getElementById('next-btn').style.display='none';
   document.getElementById('quiz-body').scrollTop=0;
-  var opts=document.getElementById('opts');
-  opts.innerHTML='';
+  var opts=document.getElementById('opts');opts.innerHTML='';
   for(var i=0;i<q.o.length;i++){
-    var b=document.createElement('button');
-    b.className='opt';
+    var b=document.createElement('button');b.className='opt';
     b.textContent=String.fromCharCode(97+i)+') '+q.o[i];
     (function(idx){b.onclick=function(){pick(idx);};})(i);
     opts.appendChild(b);
   }
 }
 
-/* ── pick answer ── */
+/* ── PICK ── */
 function pick(i){
   var q=curQs[curIdx];
   var btns=document.querySelectorAll('.opt');
   for(var k=0;k<btns.length;k++) btns[k].disabled=true;
-  var fb=document.getElementById('fb');
-  var nb=document.getElementById('next-btn');
+  var fb=document.getElementById('fb'),nb=document.getElementById('next-btn');
   if(i===q.a){
     btns[i].className='opt correct';
-    fb.className='fb show ok';fb.textContent='✓ ¡Correcto!';
-    curScore++;
+    fb.className='fb show ok';fb.textContent='✓ ¡Correcto!';curScore++;
     curAnswers.push({q:q.q,ok:true,chosen:i,ans:q.a,opts:q.o});
   } else {
-    btns[i].className='opt wrong';
-    btns[q.a].className='opt reveal';
+    btns[i].className='opt wrong';btns[q.a].className='opt reveal';
     fb.className='fb show ko';fb.textContent='✗ Incorrecto. Correcta: '+String.fromCharCode(97+q.a)+') '+q.o[q.a];
     curAnswers.push({q:q.q,ok:false,chosen:i,ans:q.a,opts:q.o});
   }
-  nb.style.display='block';
-  nb.textContent=curIdx<curQs.length-1?'Siguiente →':'Ver resultado';
+  nb.style.display='block';nb.textContent=curIdx<curQs.length-1?'Siguiente →':'Ver resultado';
 }
 
 function nextQ(){curIdx++;if(curIdx>=curQs.length)showResult();else renderQ();}
 
-/* ── show result ── */
+/* ── RESULT ── */
 function showResult(){
   state[curSec].score=curScore;state[curSec].done=true;state[curSec].answers=curAnswers;
-  var total=curQs.length,pct=Math.round((curScore/total)*100);
-  var sec=null;
-  for(var i=0;i<SECS.length;i++){if(SECS[i].id===curSec){sec=SECS[i];break;}}
+  var tot=curQs.length,pct=Math.round((curScore/tot)*100);
+  var sec=null;for(var i=0;i<SECS.length;i++) if(SECS[i].id===curSec){sec=SECS[i];break;}
   document.getElementById('res-title').textContent=sec.name;
-  document.getElementById('sc-n').textContent=curScore+'/'+total;
+  document.getElementById('sc-n').textContent=curScore+'/'+tot;
   document.getElementById('sc-pct').textContent=pct+'%';
   document.getElementById('sc-msg').textContent=pct>=80?'¡Excelente! Superado con éxito.':pct>=60?'Buen trabajo, repasa algunas respuestas.':'Necesitas repasar este apartado.';
-  var wrong=[];
-  for(var i=0;i<curAnswers.length;i++){if(!curAnswers[i].ok)wrong.push(curAnswers[i]);}
+  var wrong=[];for(var i=0;i<curAnswers.length;i++) if(!curAnswers[i].ok) wrong.push(curAnswers[i]);
   var rt=document.getElementById('rev-ttl'),rl=document.getElementById('rev-list');
   rl.innerHTML='';
   rt.textContent=wrong.length===0?'✓ ¡Sin errores en este apartado!':'Respuestas incorrectas ('+wrong.length+')';
   for(var i=0;i<wrong.length;i++){
-    var a=wrong[i],d=document.createElement('div');
-    d.className='rev-item';
+    var a=wrong[i],d=document.createElement('div');d.className='rev-item';
     d.innerHTML='<div class="rev-q">'+a.q+'</div>'
       +'<div class="rev-w">✗ Tu respuesta: '+String.fromCharCode(97+a.chosen)+') '+a.opts[a.chosen]+'</div>'
       +'<div class="rev-r">✓ Correcta: '+String.fromCharCode(97+a.ans)+') '+a.opts[a.ans]+'</div>';
@@ -509,20 +576,17 @@ function showResult(){
 }
 
 function retrySection(){startSec(curSec);}
-
 function goMenu(){buildMenu();show('scr-menu');}
-
 function resetAll(){
   if(!confirm('¿Reiniciar todas las puntuaciones?'))return;
-  for(var i=0;i<SECS.length;i++){
-    var id=SECS[i].id;
-    state[id]={score:0,total:state[id].total,done:false,answers:[]};
-  }
+  for(var i=0;i<SECS.length;i++){var id=SECS[i].id;state[id]={score:0,total:state[id].total,done:false,answers:[]};}
   buildMenu();show('scr-menu');
 }
 
-applyLayout();
-buildMenu();
+/* ── PWA ── */
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+
+applyLayout();buildMenu();
 </script>
 </body>
 </html>
