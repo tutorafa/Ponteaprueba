@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Fondo rojo con esquinas redondeadas -->
+  <rect width="512" height="512" rx="110" fill="#ED1C24"/>
+
+  <!-- Clipboard body -->
+  <rect x="116" y="140" width="280" height="264" rx="28" fill="none" stroke="#fff" stroke-width="24"/>
+
+  <!-- Clip top center -->
+  <rect x="196" y="100" width="120" height="72" rx="24" fill="none" stroke="#fff" stroke-width="22"/>
+
+  <!-- Check circle -->
+  <circle cx="182" cy="244" r="46" fill="none" stroke="#fff" stroke-width="20"/>
+  <polyline points="156,244 176,268 212,218" fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Lines next to check -->
+  <line x1="250" y1="234" x2="346" y2="234" stroke="#fff" stroke-width="20" stroke-linecap="round"/>
+  <line x1="250" y1="262" x2="326" y2="262" stroke="#fff" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- Empty circle row 2 -->
+  <circle cx="182" cy="318" r="26" fill="none" stroke="#fff" stroke-width="18"/>
+  <line x1="226" y1="318" x2="336" y2="318" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- Empty circle row 3 -->
+  <circle cx="182" cy="374" r="26" fill="none" stroke="#fff" stroke-width="18"/>
+  <line x1="226" y1="374" x2="326" y2="374" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- Question bubble -->
+  <circle cx="348" cy="358" r="68" fill="#fff"/>
+  <text x="348" y="385" text-anchor="middle" font-size="82" font-weight="900" fill="#ED1C24" font-family="Arial,Helvetica,sans-serif">?</text>
+</svg>
