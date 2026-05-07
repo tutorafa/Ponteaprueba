@@ -7,8 +7,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ponte a Prueba">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="manifest" id="pwa-manifest">
+<link rel="apple-touch-icon" id="apple-icon">
+<meta name="mobile-web-app-capable" content="yes">
 <title>Ponte a Prueba</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -260,6 +261,18 @@ var QQ=[
   {s:'conceptos',q:'¿Con qué prioridad debo abrir un servicio posterior?',o:['Normal siempre','Inmediato no urgente siempre','Normal para daños e Inmediato no urgente para coordinación o servicios prioritarios'],a:2},
   {s:'conceptos',q:'¿Estoy pendiente de un material o no me pueden atender hasta dentro de 5 días?',o:['Retraso mi servicio para que no me cuente en la ficha','Me quedo el servicio, informando previamente al cliente si es por material','Dejo el servicio Pendiente de Cliente hasta la fecha prevista'],a:1},
   {s:'conceptos',q:'¿Cuándo debo hacer una video ayuda?',o:['Para que me autoricen a enviar un localizador o resinado de tuberías','Para que me autoricen a enviar un gremio de zanjas o andamios','Las dos anteriores son verdaderas'],a:2},
+  {s:'conceptos',type:'tf',q:'Indica si son verdaderas o falsas las siguientes afirmaciones:',items:[
+    {text:'Mala instalación: no se cubre ni la reparación ni los daños ocasionados',ans:'verdadero'},
+    {text:'Defecto de los materiales o inadecuados: reparamos por cortesía',ans:'falso'},
+    {text:'Condensaciones: no se repara la causa, pero sí reparamos los daños',ans:'falso'},
+    {text:'Deterioro o envejecimiento de los materiales: no se cubre la causa, pero sí reparamos los daños',ans:'verdadero'},
+    {text:'Filtraciones del tejado, fachada o terreno: ni se cubre la causa ni reparamos los daños propios',ans:'verdadero'}
+  ]},
+  {s:'conceptos',type:'tf',q:'¿A quién tengo que dirigirme en los siguientes casos?',items:[
+    {text:'Para consultas técnicas desde el domicilio me dirijo a TSR de Soporte',ans:'falso',hint:'La respuesta correcta es: TSR de Video ayuda'},
+    {text:'Para verificar datos del expediente, coberturas o teléfonos con Batería de profesionales',ans:'verdadero'},
+    {text:'Para cese temporal, cambio datos personales o de guardia con TSR de Soporte',ans:'verdadero'}
+  ]},
   {s:'aplic',q:'La gestión de un servicio con Appcol sigue el siguiente orden:',o:['Primer contacto – Inicio Reparación – Parte de Trabajo – Fin','Primer contacto – Inicio Reparación – Fotos antes/después – Parte de Trabajo – Fin','Inicio Reparación – Fotos antes/después – Fin – Parte de Trabajo'],a:1},
   {s:'aplic',q:'¿Qué funciones tiene el menú inferior de Appcol?',o:['Parte de trabajo – Video ayuda – IPS – Fotos','Fotos – Hitos – Parte de trabajo','Fotos – Parte de trabajo – Hitos – Video ayuda – IPS – Aplazamientos'],a:2},
   {s:'aplic',q:'El asegurado no acepta un presupuesto, ¿cómo descuento?',o:['Por opción de Trabajo realizado, poniendo que no acepta ppto.','Por la opción de Presupuesto/Autorización','Por la opción de Aplazamiento'],a:1},
@@ -505,6 +518,92 @@ function resetAll(){
 
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 applyLayout();buildMenu();
+
+/* ── PWA: genera iconos y manifest inline ── */
+(function(){
+  function drawIcon(size){
+    var cv=document.createElement('canvas');
+    cv.width=cv.height=size;
+    var ctx=cv.getContext('2d');
+    var r=size*0.21;
+    // background
+    ctx.beginPath();
+    ctx.moveTo(r,0);ctx.lineTo(size-r,0);ctx.quadraticCurveTo(size,0,size,r);
+    ctx.lineTo(size,size-r);ctx.quadraticCurveTo(size,size,size-r,size);
+    ctx.lineTo(r,size);ctx.quadraticCurveTo(0,size,0,size-r);
+    ctx.lineTo(0,r);ctx.quadraticCurveTo(0,0,r,0);ctx.closePath();
+    ctx.fillStyle='#ED1C24';ctx.fill();
+    var sc=size/512;
+    ctx.save();ctx.scale(sc,sc);
+    ctx.strokeStyle='#fff';ctx.fillStyle='#fff';ctx.lineJoin='round';ctx.lineCap='round';
+    // clipboard body
+    ctx.beginPath();rrp(ctx,116,140,280,264,28);ctx.lineWidth=24;ctx.stroke();
+    // clip top
+    ctx.beginPath();rrp(ctx,196,100,120,72,24);ctx.lineWidth=22;ctx.stroke();
+    // check circle
+    ctx.beginPath();ctx.arc(182,244,46,0,Math.PI*2);ctx.lineWidth=20;ctx.stroke();
+    // checkmark
+    ctx.beginPath();ctx.moveTo(156,244);ctx.lineTo(176,268);ctx.lineTo(212,218);ctx.lineWidth=20;ctx.stroke();
+    // lines
+    ctx.beginPath();ctx.moveTo(250,234);ctx.lineTo(346,234);ctx.lineWidth=20;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(250,262);ctx.lineTo(326,262);ctx.lineWidth=20;ctx.stroke();
+    // circle 2
+    ctx.beginPath();ctx.arc(182,318,26,0,Math.PI*2);ctx.lineWidth=18;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(226,318);ctx.lineTo(336,318);ctx.lineWidth=18;ctx.stroke();
+    // circle 3
+    ctx.beginPath();ctx.arc(182,374,26,0,Math.PI*2);ctx.lineWidth=18;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(226,374);ctx.lineTo(326,374);ctx.lineWidth=18;ctx.stroke();
+    // question bubble
+    ctx.beginPath();ctx.arc(348,358,68,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+    ctx.fillStyle='#ED1C24';ctx.font='bold 88px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('?',348,365);
+    ctx.restore();
+    return cv.toDataURL('image/png');
+  }
+  function rrp(ctx,x,y,w,h,r){
+    ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+  }
+
+  var i192=drawIcon(192);
+  var i512=drawIcon(512);
+  var i180=drawIcon(180);
+  var i152=drawIcon(152);
+  var i144=drawIcon(144);
+
+  // apple-touch-icon
+  document.getElementById('apple-icon').href=i180;
+
+  // favicon
+  var favicon=document.createElement('link');
+  favicon.rel='icon';favicon.type='image/png';favicon.href=drawIcon(32);
+  document.head.appendChild(favicon);
+
+  // manifest inline
+  var manifest={
+    name:'Ponte a Prueba',
+    short_name:'Ponte a Prueba',
+    description:'Cuestionario interactivo de formación',
+    start_url:'.',
+    display:'standalone',
+    orientation:'portrait',
+    background_color:'#ED1C24',
+    theme_color:'#ED1C24',
+    lang:'es',
+    icons:[
+      {src:i144,sizes:'144x144',type:'image/png',purpose:'any maskable'},
+      {src:i152,sizes:'152x152',type:'image/png',purpose:'any maskable'},
+      {src:i180,sizes:'180x180',type:'image/png',purpose:'any maskable'},
+      {src:i192,sizes:'192x192',type:'image/png',purpose:'any maskable'},
+      {src:i512,sizes:'512x512',type:'image/png',purpose:'any maskable'}
+    ]
+  };
+  var blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  document.getElementById('pwa-manifest').href=url;
+})();
 </script>
 </body>
 </html>
