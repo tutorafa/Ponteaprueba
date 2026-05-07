@@ -15,51 +15,37 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#ED1C24;min-height:100vh;display:flex;justify-content:center;align-items:center;}
 #app{width:100%;max-width:480px;min-height:100vh;background:#f0f0f0;display:flex;flex-direction:column;}
 
-/* ── HEADER ── */
-.hdr{background:#ED1C24;padding:14px 16px 14px;flex-shrink:0;
-  box-shadow:0 2px 8px rgba(0,0,0,.25);}
+.hdr{background:#ED1C24;padding:14px 16px 14px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.25);}
 .hdr-row{display:flex;align-items:center;gap:10px;}
-.hdr-logo{width:42px;height:42px;flex-shrink:0;}
+.hdr-icon{font-size:32px;line-height:1;flex-shrink:0;}
 .hdr-texts{flex:1;}
 .hdr-title{color:#fff;font-size:19px;font-weight:800;letter-spacing:.04em;display:block;line-height:1.2;}
 .hdr-sub{color:rgba(255,255,255,.8);font-size:11px;letter-spacing:.05em;display:block;margin-top:1px;}
 .reset-btn{background:rgba(255,255,255,.2);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .back-btn{background:rgba(255,255,255,.2);border:none;color:#fff;font-size:13px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;}
 
-/* ── SCREENS ── */
 .screen{display:none;flex-direction:column;flex:1;}
 .screen.active{display:flex;}
 
-/* ══ MENU ══ */
+/* MENU */
 .menu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 12px 4px;}
 .menu-group{margin-bottom:14px;}
 .group-label{font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;padding-left:2px;}
 .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.menu-btn{
-  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
-  width:100%;padding:14px 12px 12px;border-radius:16px;
-  border:none;background:#fff;cursor:pointer;text-align:left;
-  box-shadow:0 2px 8px rgba(0,0,0,.10);
-  transition:transform .1s;
-}
+.menu-btn{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:100%;padding:14px 12px 12px;border-radius:16px;border:none;background:#fff;cursor:pointer;text-align:left;box-shadow:0 2px 8px rgba(0,0,0,.10);transition:transform .1s;}
 .menu-btn:active{transform:scale(.97);}
 .menu-btn.done{background:#f0faf0;}
 .mb-top{display:flex;align-items:center;justify-content:space-between;width:100%;}
-/* círculo de progreso en icono */
 .mb-circle{position:relative;width:44px;height:44px;flex-shrink:0;}
 .mb-circle svg{position:absolute;top:0;left:0;}
 .mb-emoji{position:absolute;top:0;left:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:20px;}
 .mb-check{font-size:16px;color:#2e7d32;font-weight:700;}
 .mb-arr{font-size:16px;color:#ccc;}
-.menu-name{font-size:13px;font-weight:800;color:#1a1a1a;line-height:1.3;}
-.menu-qs{font-size:11px;color:#888;margin-top:1px;}
+.menu-name{font-size:15px;font-weight:800;color:#1a1a1a;line-height:1.3;}
+.menu-qs{font-size:13px;color:#888;margin-top:1px;}
 
-/* ── STATS CARD ── */
 #sf-bottom{padding:0 12px 20px;}
-#stats-card{
-  background:#fff;border-radius:20px;padding:18px 16px 18px;width:100%;
-  box-shadow:0 2px 10px rgba(0,0,0,.10);
-}
+#stats-card{background:#fff;border-radius:20px;padding:18px 16px 18px;width:100%;box-shadow:0 2px 10px rgba(0,0,0,.10);}
 .sc-title{text-align:center;font-size:16px;font-weight:800;color:#1a1a1a;margin-bottom:16px;}
 .sc-circle-wrap{display:flex;justify-content:center;margin-bottom:16px;}
 .sc-sep{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
@@ -73,7 +59,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .sc-col-val.green{color:#2e7d32;}
 .sc-col-val.red{color:#ED1C24;}
 
-/* ══ QUIZ ══ */
+/* QUIZ */
 .quiz-sub{margin-top:8px;}
 .prog-bg{background:rgba(255,255,255,.3);border-radius:99px;height:4px;}
 .prog-fill{height:4px;border-radius:99px;background:#fff;transition:width .35s;}
@@ -84,13 +70,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .q-prog-track{background:#e0e0e0;border-radius:99px;height:7px;overflow:hidden;margin-bottom:16px;}
 .q-prog-bar{height:7px;border-radius:99px;background:#bbb;transition:width .35s;}
 .q-text{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.5;margin-bottom:16px;}
-.opt{
-  display:block;width:100%;text-align:left;padding:13px 16px;
-  border:none;border-radius:14px;background:#fff;color:#1a1a1a;
-  font-size:14px;line-height:1.4;cursor:pointer;margin-bottom:9px;
-  -webkit-appearance:none;font-family:inherit;
-  box-shadow:0 2px 6px rgba(0,0,0,.09);
-}
+.opt{display:block;width:100%;text-align:left;padding:13px 16px;border:none;border-radius:14px;background:#fff;color:#1a1a1a;font-size:14px;line-height:1.4;cursor:pointer;margin-bottom:9px;-webkit-appearance:none;font-family:inherit;box-shadow:0 2px 6px rgba(0,0,0,.09);}
 .opt:active:not(:disabled){transform:scale(.985);}
 .opt.correct{background:#e6f4ea;border:2px solid #2e7d32;color:#1b5e20;}
 .opt.wrong{background:#fdecea;border:2px solid #c62828;color:#7f0000;}
@@ -104,7 +84,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .next-btn{width:100%;padding:16px;border-radius:14px;background:#ED1C24;color:#fff;border:none;font-size:16px;font-weight:700;cursor:pointer;display:none;font-family:inherit;box-shadow:0 3px 10px rgba(237,28,36,.4);}
 .next-btn:active{background:#B8141A;}
 
-/* ══ RESULT ══ */
+/* RESULT */
 #res-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px;background:#f0f0f0;}
 .score-card{background:#ED1C24;border-radius:18px;padding:22px;text-align:center;margin-bottom:14px;box-shadow:0 4px 14px rgba(237,28,36,.35);}
 .sc-n{font-size:54px;font-weight:900;color:#fff;line-height:1;}
@@ -121,7 +101,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .rbtn.pri{background:#ED1C24;color:#fff;box-shadow:0 3px 10px rgba(237,28,36,.35);}
 .rbtn.sec{background:#fff;color:#1a1a1a;box-shadow:0 2px 6px rgba(0,0,0,.1);}
 
-/* PC layout */
 @media(min-width:768px){
   body{align-items:center;}
   #app{width:90vw;max-width:1100px;height:calc(90vw*9/16);max-height:90vh;min-height:unset;border-radius:18px;overflow:hidden;box-shadow:0 10px 50px rgba(0,0,0,.5);flex-direction:row;}
@@ -137,27 +116,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   <div id="menu-left">
     <div class="hdr">
       <div class="hdr-row">
-        <svg class="hdr-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="100" rx="22" fill="#ED1C24"/>
-          <!-- clipboard body -->
-          <rect x="22" y="28" width="56" height="52" rx="6" fill="none" stroke="#fff" stroke-width="5"/>
-          <!-- clip top -->
-          <rect x="38" y="20" width="24" height="14" rx="5" fill="none" stroke="#fff" stroke-width="4.5"/>
-          <!-- check circle -->
-          <circle cx="36" cy="48" r="9" fill="none" stroke="#fff" stroke-width="4"/>
-          <polyline points="30,48 34.5,53 42,43" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- lines -->
-          <line x1="50" y1="46" x2="68" y2="46" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          <line x1="50" y1="54" x2="64" y2="54" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          <!-- empty circles -->
-          <circle cx="36" cy="63" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
-          <line x1="45" y1="63" x2="65" y2="63" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
-          <circle cx="36" cy="74" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
-          <line x1="45" y1="74" x2="63" y2="74" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
-          <!-- question bubble -->
-          <circle cx="68" cy="70" r="13" fill="#fff"/>
-          <text x="68" y="75" text-anchor="middle" font-size="16" font-weight="900" fill="#ED1C24" font-family="Arial,sans-serif">?</text>
-        </svg>
+        <span class="hdr-icon">📝</span>
         <div class="hdr-texts">
           <span class="hdr-title">PONTE A PRUEBA</span>
           <span class="hdr-sub">Cuestionario interactivo</span>
@@ -216,21 +175,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   <div id="quiz-left">
     <div class="hdr">
       <div class="hdr-row">
-        <svg class="hdr-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="100" rx="22" fill="#ED1C24"/>
-          <rect x="22" y="28" width="56" height="52" rx="6" fill="none" stroke="#fff" stroke-width="5"/>
-          <rect x="38" y="20" width="24" height="14" rx="5" fill="none" stroke="#fff" stroke-width="4.5"/>
-          <circle cx="36" cy="48" r="9" fill="none" stroke="#fff" stroke-width="4"/>
-          <polyline points="30,48 34.5,53 42,43" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="50" y1="46" x2="68" y2="46" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          <line x1="50" y1="54" x2="64" y2="54" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          <circle cx="36" cy="63" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
-          <line x1="45" y1="63" x2="65" y2="63" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
-          <circle cx="36" cy="74" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
-          <line x1="45" y1="74" x2="63" y2="74" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
-          <circle cx="68" cy="70" r="13" fill="#fff"/>
-          <text x="68" y="75" text-anchor="middle" font-size="16" font-weight="900" fill="#ED1C24" font-family="Arial,sans-serif">?</text>
-        </svg>
+        <span class="hdr-icon">📝</span>
         <div class="hdr-texts">
           <span class="hdr-title" id="q-sec-title"></span>
           <span class="hdr-sub">Cuestionario interactivo</span>
@@ -263,21 +208,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   <div id="res-left">
     <div class="hdr">
       <div class="hdr-row">
-        <svg class="hdr-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="100" rx="22" fill="#ED1C24"/>
-          <rect x="22" y="28" width="56" height="52" rx="6" fill="none" stroke="#fff" stroke-width="5"/>
-          <rect x="38" y="20" width="24" height="14" rx="5" fill="none" stroke="#fff" stroke-width="4.5"/>
-          <circle cx="36" cy="48" r="9" fill="none" stroke="#fff" stroke-width="4"/>
-          <polyline points="30,48 34.5,53 42,43" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="50" y1="46" x2="68" y2="46" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          <line x1="50" y1="54" x2="64" y2="54" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          <circle cx="36" cy="63" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
-          <line x1="45" y1="63" x2="65" y2="63" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
-          <circle cx="36" cy="74" r="5" fill="none" stroke="#fff" stroke-width="3.5"/>
-          <line x1="45" y1="74" x2="63" y2="74" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
-          <circle cx="68" cy="70" r="13" fill="#fff"/>
-          <text x="68" y="75" text-anchor="middle" font-size="16" font-weight="900" fill="#ED1C24" font-family="Arial,sans-serif">?</text>
-        </svg>
+        <span class="hdr-icon">📝</span>
         <div class="hdr-texts">
           <span class="hdr-title" id="res-title"></span>
           <span class="hdr-sub">Resultado del apartado</span>
@@ -303,9 +234,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   </div>
 </div>
 
-</div><!-- #app -->
+</div>
 <script>
-/* ── SECTIONS ── */
 var GROUPS=[
   {label:'', secs:[
     {id:'conceptos', name:'Conceptos básicos', icon:'🎯'},
@@ -314,10 +244,10 @@ var GROUPS=[
     {id:'tarifas',   name:'Tarifas',           icon:'📋'}
   ]},
   {label:'Coberturas', secs:[
-    {id:'font',  name:'Fontanería',   icon:'🔧'},
-    {id:'alba',  name:'Albañilería',  icon:'🏗️'},
-    {id:'crist', name:'Cristalería',  icon:'🪟'},
-    {id:'elec',  name:'Daños eléctricos', icon:'⚡'}
+    {id:'font',  name:'Fontanería',        icon:'🔧'},
+    {id:'alba',  name:'Albañilería',       icon:'🏗️'},
+    {id:'crist', name:'Cristalería',       icon:'🪟'},
+    {id:'elec',  name:'Daños eléctricos',  icon:'⚡'}
   ]}
 ];
 var SECS=[];
@@ -379,14 +309,12 @@ var QQ=[
   {s:'crist',q:'¿Se cubren los golpes en un escaparate?',o:['No, los daños superficiales no están cubiertos','Sí, si pertenece al local asegurado','Sí, si afecta a una cara del vidrio'],a:0}
 ];
 
-/* ── STATE ── */
 var state={};
 for(var i=0;i<SECS.length;i++) state[SECS[i].id]={score:0,total:0,done:false,answers:[]};
 for(var i=0;i<QQ.length;i++) state[QQ[i].s].total++;
 
 var curSec='',curQs=[],curIdx=0,curScore=0,curAnswers=[];
 
-/* ── SCREEN ── */
 function show(id){
   var all=document.querySelectorAll('.screen');
   for(var i=0;i<all.length;i++) all[i].classList.remove('active');
@@ -419,11 +347,8 @@ function applyLayout(){
   }
 }
 window.addEventListener('resize',applyLayout);
-
-/* ── BACK BUTTON ── */
 document.getElementById('back-btn').addEventListener('click',function(){goMenu();});
 
-/* ── BUILD MENU ── */
 function buildMenu(){
   var list=document.getElementById('menu-list');
   list.innerHTML='';
@@ -443,7 +368,7 @@ function buildMenu(){
       var sec=grp.secs[s];
       var st=state[sec.id];
       var pct=st.done&&st.total>0?Math.round((st.score/st.total)*100):0;
-      var circ=2*Math.PI*18; // r=18
+      var circ=2*Math.PI*18;
       var offset=circ-(circ*(pct/100));
       var strokeColor=st.done?(pct>=70?'#2e7d32':'#ED1C24'):'#e0e0e0';
       var btn=document.createElement('button');
@@ -470,7 +395,6 @@ function buildMenu(){
   updateStats();
 }
 
-/* ── STATS ── */
 function updateStats(){
   var totalQ=0,answeredQ=0,correctQ=0;
   for(var i=0;i<SECS.length;i++){
@@ -498,7 +422,6 @@ function updateStats(){
   else{rv.textContent='—';rv.className='sc-col-val';}
 }
 
-/* ── START SECTION ── */
 function startSec(id){
   curSec=id;curQs=[];
   for(var i=0;i<QQ.length;i++) if(QQ[i].s===id) curQs.push(QQ[i]);
@@ -510,7 +433,6 @@ function startSec(id){
   show('scr-quiz');renderQ();
 }
 
-/* ── RENDER Q ── */
 function renderQ(){
   var q=curQs[curIdx],tot=curQs.length;
   document.getElementById('prog-fill').style.width=Math.round((curIdx/tot)*100)+'%';
@@ -532,7 +454,6 @@ function renderQ(){
   }
 }
 
-/* ── PICK ── */
 function pick(i){
   var q=curQs[curIdx];
   var btns=document.querySelectorAll('.opt');
@@ -552,7 +473,6 @@ function pick(i){
 
 function nextQ(){curIdx++;if(curIdx>=curQs.length)showResult();else renderQ();}
 
-/* ── RESULT ── */
 function showResult(){
   state[curSec].score=curScore;state[curSec].done=true;state[curSec].answers=curAnswers;
   var tot=curQs.length,pct=Math.round((curScore/tot)*100);
@@ -583,9 +503,7 @@ function resetAll(){
   buildMenu();show('scr-menu');
 }
 
-/* ── PWA ── */
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-
 applyLayout();buildMenu();
 </script>
 </body>
