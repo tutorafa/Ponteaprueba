@@ -7,15 +7,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ponte a Prueba">
+<meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" id="pwa-manifest">
 <link rel="apple-touch-icon" id="apple-icon">
-<meta name="mobile-web-app-capable" content="yes">
 <title>Ponte a Prueba</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#ED1C24;min-height:100vh;display:flex;justify-content:center;align-items:center;}
 #app{width:100%;max-width:480px;min-height:100vh;background:#f0f0f0;display:flex;flex-direction:column;}
-
 .hdr{background:#ED1C24;padding:14px 16px 14px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.25);}
 .hdr-row{display:flex;align-items:center;gap:10px;}
 .hdr-icon{font-size:32px;line-height:1;flex-shrink:0;}
@@ -24,11 +23,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .hdr-sub{color:rgba(255,255,255,.8);font-size:11px;letter-spacing:.05em;display:block;margin-top:1px;}
 .reset-btn{background:rgba(255,255,255,.2);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .back-btn{background:rgba(255,255,255,.2);border:none;color:#fff;font-size:13px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;}
-
 .screen{display:none;flex-direction:column;flex:1;}
 .screen.active{display:flex;}
-
-/* MENU */
 .menu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 12px 4px;}
 .menu-group{margin-bottom:14px;}
 .group-label{font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;padding-left:2px;}
@@ -44,7 +40,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .mb-arr{font-size:16px;color:#ccc;}
 .menu-name{font-size:15px;font-weight:800;color:#1a1a1a;line-height:1.3;}
 .menu-qs{font-size:13px;color:#888;margin-top:1px;}
-
 #sf-bottom{padding:0 12px 20px;}
 #stats-card{background:#fff;border-radius:20px;padding:18px 16px 18px;width:100%;box-shadow:0 2px 10px rgba(0,0,0,.10);}
 .sc-title{text-align:center;font-size:16px;font-weight:800;color:#1a1a1a;margin-bottom:16px;}
@@ -59,8 +54,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .sc-col-val{font-size:22px;font-weight:800;color:#1a1a1a;}
 .sc-col-val.green{color:#2e7d32;}
 .sc-col-val.red{color:#ED1C24;}
-
-/* QUIZ */
 .quiz-sub{margin-top:8px;}
 .prog-bg{background:rgba(255,255,255,.3);border-radius:99px;height:4px;}
 .prog-fill{height:4px;border-radius:99px;background:#fff;transition:width .35s;}
@@ -84,8 +77,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .quiz-foot{flex-shrink:0;padding:10px 14px 20px;background:#f0f0f0;}
 .next-btn{width:100%;padding:16px;border-radius:14px;background:#ED1C24;color:#fff;border:none;font-size:16px;font-weight:700;cursor:pointer;display:none;font-family:inherit;box-shadow:0 3px 10px rgba(237,28,36,.4);}
 .next-btn:active{background:#B8141A;}
-
-/* RESULT */
 #res-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px;background:#f0f0f0;}
 .score-card{background:#ED1C24;border-radius:18px;padding:22px;text-align:center;margin-bottom:14px;box-shadow:0 4px 14px rgba(237,28,36,.35);}
 .sc-n{font-size:54px;font-weight:900;color:#fff;line-height:1;}
@@ -101,7 +92,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 .rbtn{flex:1;padding:15px;border-radius:14px;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
 .rbtn.pri{background:#ED1C24;color:#fff;box-shadow:0 3px 10px rgba(237,28,36,.35);}
 .rbtn.sec{background:#fff;color:#1a1a1a;box-shadow:0 2px 6px rgba(0,0,0,.1);}
-
 @media(min-width:768px){
   body{align-items:center;}
   #app{width:90vw;max-width:1100px;height:calc(90vw*9/16);max-height:90vh;min-height:unset;border-radius:18px;overflow:hidden;box-shadow:0 10px 50px rgba(0,0,0,.5);flex-direction:row;}
@@ -112,7 +102,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 <body>
 <div id="app">
 
-<!-- ══ MENU ══ -->
+<!-- MENU -->
 <div id="scr-menu" class="screen active">
   <div id="menu-left">
     <div class="hdr">
@@ -144,34 +134,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
             </div>
           </div>
         </div>
-        <div class="sc-sep">
-          <div class="sc-sep-line"></div>
-          <span class="sc-sep-txt">Respuestas</span>
-          <div class="sc-sep-line"></div>
-        </div>
+        <div class="sc-sep"><div class="sc-sep-line"></div><span class="sc-sep-txt">Respuestas</span><div class="sc-sep-line"></div></div>
         <div class="sc-row">
-          <div class="sc-col">
-            <div class="sc-col-icon">💬</div>
-            <div class="sc-col-lbl">Preguntas<br>respondidas</div>
-            <div class="sc-col-val" id="stat-answered">—</div>
-          </div>
-          <div class="sc-col">
-            <div class="sc-col-icon">✅</div>
-            <div class="sc-col-lbl">Respuestas<br>correctas</div>
-            <div class="sc-col-val green" id="stat-correct">—</div>
-          </div>
-          <div class="sc-col">
-            <div class="sc-col-icon">🏆</div>
-            <div class="sc-col-lbl">Puntuación<br>obtenida</div>
-            <div class="sc-col-val" id="stat-result">—</div>
-          </div>
+          <div class="sc-col"><div class="sc-col-icon">💬</div><div class="sc-col-lbl">Preguntas<br>respondidas</div><div class="sc-col-val" id="stat-answered">—</div></div>
+          <div class="sc-col"><div class="sc-col-icon">✅</div><div class="sc-col-lbl">Respuestas<br>correctas</div><div class="sc-col-val green" id="stat-correct">—</div></div>
+          <div class="sc-col"><div class="sc-col-icon">🏆</div><div class="sc-col-lbl">Puntuación<br>obtenida</div><div class="sc-col-val" id="stat-result">—</div></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ QUIZ ══ -->
+<!-- QUIZ -->
 <div id="scr-quiz" class="screen">
   <div id="quiz-left">
     <div class="hdr">
@@ -204,7 +178,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
   </div>
 </div>
 
-<!-- ══ RESULT ══ -->
+<!-- RESULT -->
 <div id="scr-result" class="screen">
   <div id="res-left">
     <div class="hdr">
@@ -239,22 +213,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-s
 <script>
 var GROUPS=[
   {label:'', secs:[
-    {id:'conceptos', name:'Conceptos básicos', icon:'🎯'},
-    {id:'aplic',     name:'Aplicaciones',      icon:'📱'},
-    {id:'multimap',  name:'Multimap',          icon:'💶'},
-    {id:'tarifas',   name:'Tarifas',           icon:'📋'}
+    {id:'conceptos',name:'Conceptos básicos',icon:'🎯'},
+    {id:'aplic',    name:'Aplicaciones',     icon:'📱'},
+    {id:'multimap', name:'Multimap',         icon:'💶'},
+    {id:'tarifas',  name:'Tarifas',          icon:'📋'}
   ]},
   {label:'Coberturas', secs:[
-    {id:'font',  name:'Fontanería',        icon:'🔧'},
-    {id:'alba',  name:'Albañilería',       icon:'🏗️'},
-    {id:'crist', name:'Cristalería',       icon:'🪟'},
-    {id:'elec',  name:'Daños eléctricos',  icon:'⚡'}
+    {id:'font', name:'Fontanería',       icon:'🔧'},
+    {id:'alba', name:'Albañilería',      icon:'🏗️'},
+    {id:'crist',name:'Cristalería',      icon:'🪟'},
+    {id:'elec', name:'Daños eléctricos', icon:'⚡'}
   ]}
 ];
 var SECS=[];
 for(var g=0;g<GROUPS.length;g++) for(var s=0;s<GROUPS[g].secs.length;s++) SECS.push(GROUPS[g].secs[s]);
 
 var QQ=[
+  /* ── CONCEPTOS BÁSICOS ── */
   {s:'conceptos',q:'¿Qué es una Asistencia?',o:['Trabajos no cubiertos por póliza y que PAGA EL CLIENTE','Trabajos cubiertos por póliza y que PAGA MAPFRE','Un siniestro excluido'],a:0},
   {s:'conceptos',q:'¿Qué es un seguro de Comunidad con garantía amplia?',o:['El que cubre el continente comunitario','El que no cubre una vivienda particular','El que cubre continente comunitario y privativo de las viviendas'],a:2},
   {s:'conceptos',q:'¿Cuántas veces intento contactar si no me cogen el teléfono?',o:['Una o dos veces a lo sumo','6 veces durante la primera hora','Durante 3 días en diferentes horarios o a lo largo del día en fontanería'],a:2},
@@ -265,23 +240,36 @@ var QQ=[
   {s:'conceptos',q:'¿Quién me puede facilitar datos de un expediente, dirección, coberturas o teléfonos?',o:['Llamo a TSR de Soporte','Llamo a Batería de profesionales','Hago Video Ayuda desde Appcol'],a:1},
   {s:'conceptos',q:'¿Qué hago si en un servicio no me dan cita antes de un mes o no saben cuándo pueden atenderme?',o:['Lo mantengo en pantalla, quedando a la espera','Lo aplazo como pendiente de cliente, e indico que debe llamar a Mapfre para reclamar el servicio cuando ya pueda atendernos','Lo voy aplazando semanalmente y contactando con el cliente para ver cuándo puede atendernos'],a:1},
   {s:'conceptos',q:'¿Es necesario informar a los clientes sobre los tiempos de actuación?',o:['Sí, para que conozcan los plazos de entrega de materiales o cuándo acudiremos por cualquier circunstancia','No, es suficiente con que yo lo sepa, el cliente no necesita esa información','Sí, pero únicamente en la primera visita, el resto de los tiempos no son relevantes'],a:0},
-  {s:'aplic',q:'La gestión de un servicio con Appcol sigue el siguiente orden:',o:['Primer contacto – Inicio Reparación – Parte de Trabajo – Fin','Primer contacto – Inicio Reparación – Fotos antes/después – Parte de Trabajo – Fin','Inicio Reparación – Fotos antes/después – Fin – Parte de Trabajo'],a:1},
-  {s:'aplic',q:'El asegurado no acepta un presupuesto, ¿cómo descuento?',o:['Por opción de Trabajo realizado, poniendo que no acepta ppto.','Por la opción de Presupuesto/Autorización','Por la opción de Aplazamiento'],a:1},
-  {s:'aplic',q:'¿Cuándo respondo sí a "¿existe información relevante para la compañía?"',o:['Cuando quiera dejar anotado algo de lo sucedido','Solo cuando se necesite gestión posterior por Mapfre y no esté en otra pregunta','Para enviar otro gremio después de mi intervención'],a:1},
-  {s:'aplic',q:'Quiero enviar otro gremio después de mi intervención, ¿cómo hago?',o:['Llamo a Batería de proveedores para abrirlo','Lo pongo en información relevante para la compañía al descontar','Abriendo IPS desde Appcol o Intervención posterior desde Infocol'],a:2},
-  {s:'aplic',q:'Si tengo que descontar un servicio a cero, ¿tengo que poner algún código?',o:['No es necesario hacer nada','Hay que añadir un código con importe cero','Llamo a Batería de proveedores para que lo descuenten'],a:1},
-  {s:'aplic',q:'El cliente solicita indemnización, ¿cómo descuento?',o:['Por trabajo realizado, marcando información relevante para la compañía','Simplemente poniéndolo en mi descuento por trabajo realizado','Por la opción de Presupuesto/Autorización'],a:2},
-  {s:'aplic',q:'¿Puedo abrir una asistencia al asegurado si me lo solicita un cliente?',o:['No, eso lo debe hacer el cliente llamando a la compañía','Sí, por APPCOL opción IPS me abro la asistencia','Sí, por APPCOL opción IPS o por Infocol marcando "existe intervención posterior"'],a:2},
-  {s:'aplic',q:'¿Cómo retraso un servicio para otro momento?',o:['Marcando Hito de Aplazamiento por Appcol','Por Retraso del Servicio en Appcol o por opción Aplazamiento en Infocol','Dejarlo pendiente de cliente hasta que llame'],a:1},
+
+  /* ── APLICACIONES ── */
+  {s:'aplic',q:'Si me asignan un servicio nuevo ¿Cuándo lo acepto?',o:['Los servicios se aceptan lo antes posible para evitar retrasos','Al día siguiente de la asignación','No se tiene que aceptar hasta contactar y agendar la cita con el cliente'],a:0},
+  {s:'aplic',q:'¿Cuándo respondo sí a la pregunta: ¿existe información relevante para la compañía?',o:['Cuando quiera dejar anotado algo de lo sucedido en mi intervención','Solamente cuando se necesite una gestión posterior por parte de Mapfre y no esté en otra pregunta','Para enviar otro gremio después de mi intervención'],a:1},
+  {s:'aplic',q:'El cliente solicita indemnización, ¿cómo descuento?',o:['Por trabajo realizado, marcando información relevante para la compañía','Simplemente poniéndolo en mi descuento por trabajo realizado','Informando por la opción de Presupuesto/Autorización'],a:2},
+  {s:'aplic',q:'¿Cómo informo en un descuento de que un siniestro no tiene cobertura?',o:['Lo indico en "trabajo realizado" y contesto sí a la pregunta "siniestro excluido total o en parte"','Lo indico en "trabajo realizado" y respondo "no" a todas las preguntas','Lo indico en "trabajo realizado" y respondo sí a "existe otra información relevante para la compañía"'],a:0},
+  {s:'aplic',q:'Quiero enviar otro gremio después de mi intervención, ¿cómo hago?',o:['Llamo a Batería de proveedores para abrirlo','Cuando descuente el servicio, lo pongo en información relevante para la compañía','Abriendo IPS desde Appcol o Intervención posterior desde Infocol'],a:2},
+  {s:'aplic',q:'¿Con qué prioridad debo abrir un servicio posterior?',o:['Siempre con prioridad "Normal" para su revisión en caso de error','Preferiblemente con prioridad "Inmediato no urgente" porque se asigna más rápido','Prioridad "Normal" para reparar daños e "Inmediato no urgente" para coordinación o servicios prioritarios'],a:2},
+  {s:'aplic',q:'¿Cómo retraso un servicio para otro día?',o:['Marcando Hito de Aplazamiento acordado con el cliente','Por Appcol o por Infocol opción Aplazamiento y Retraso del servicio','Dejarlo pendiente de cliente hasta que llame el cliente'],a:1},
+  {s:'aplic',q:'¿Cuándo es necesario realizar fotografías y parte de trabajo en un servicio?',o:['Cuando lo considere necesario, no es algo necesario en todos los servicios','En todos los servicios, tomando las fotos necesarias para reflejar mi intervención y aspectos relevantes como daños existentes','Sólo en exclusiones o en situaciones relevantes o especiales'],a:1},
+  {s:'aplic',q:'¿Quién tiene que firmar el parte de trabajo?',o:['Sólo puede firmar el asegurado, nunca el inquilino ni cualquier otra persona','Si se da el caso, puedo simular la firma del cliente','La persona que me atienda sea el asegurado o no y lo dejaré anotado en las casillas correspondientes'],a:2},
+  {s:'aplic',q:'¿Cuándo genero el parte de trabajo en un siniestro, en la primera visita o al finalizar los trabajos?',o:['No es necesario realizar parte de trabajo en ningún momento','En la visita previa para ver los trabajos y tomar medidas, al final no es necesario','En la última intervención cuando se finalizan los trabajos, aunque también se puede hacer en la primera visita en ciertos casos'],a:2},
+
+  /* ── MULTIMAP ── */
   {s:'multimap',q:'Las condiciones para la aplicación del IVA reducido son:',o:['Material no supera el 40% del total, no vivienda en alquiler y sin reforma en menos de dos años','A cualquier cliente si el material no supera el 40% del total','Que no sea vivienda en alquiler y tenga más de dos años, sin importar el importe'],a:0},
   {s:'multimap',q:'¿Cómo gestiono el pago de la Asistencia?',o:['En efectivo prioritariamente','Preferiblemente por recibo domiciliado o por tarjeta','A partir de 1.500€ con pago adelantado del cliente','La b y la c son correctas'],a:3},
   {s:'multimap',q:'Si el asegurado se lo tiene que pensar, ¿qué pasos sigo en Appcol?',o:['Dejo abierto el parte una semana','Selecciono PENDIENTE DE ACEPTACIÓN y queda cerrado automáticamente','Selecciono PENDIENTE DE ACEPTACIÓN y luego lo cierro por Infocol con PRESUPUESTO/AUTORIZACIÓN'],a:2},
   {s:'multimap',q:'Si el cliente no está presente, ¿quién firma el presupuesto?',o:['Si el asegurado no firma, no realizaré el trabajo','Puede firmar otra persona autorizada por escrito, anotándolo en Notas del presupuesto','Hago el trabajo igualmente, la firma no es imprescindible'],a:1},
   {s:'multimap',q:'¿Qué precios debo usar para calcular un presupuesto de asistencia?',o:['La tarifa de CLIENTE','La tarifa de PROVEEDOR','El precio de mercado'],a:0},
   {s:'multimap',q:'¿Qué hago si un cliente no tiene correo electrónico?',o:['Dejo el correo en blanco; Multimap lo envía por correo ordinario','Anoto mi correo y continúo haciendo el presupuesto por APPCOL','Hago el presupuesto en papel y lo entrego'],a:0},
+  {s:'multimap',q:'¿Cuándo tengo que hacer presupuesto previo porque el trabajo lo paga el cliente?',o:['Siniestros Verti, Oficinas Mapfre, Contratos Multimap','Asistencias Mapfre, Cliente Externo, Asistencias Verti','Siniestros Mapfre, Oficinas Verti, Contratos básicos'],a:1},
+
+  /* ── TARIFAS ── */
   {s:'tarifas',q:'¿Cuándo se utiliza el código base?',o:['Tantas veces como trabajos diferentes haya hecho','Solamente una vez por cada trabajo realizado a la vez','Se aplica junto con las visitas o para facturar una visita'],a:1},
   {s:'tarifas',q:'¿Debo facturar por pasar presupuesto?',o:['No facturo este concepto porque luego hago el trabajo','Sí, lo facturo como una visita','Solo se factura si el trabajo es muy grande'],a:0},
   {s:'tarifas',q:'¿Cómo aplico códigos principales y secundarios?',o:['Aplico siempre códigos principales','Aplico el código principal de mayor importancia y el resto adicionales','Aplico siempre adicionales'],a:1},
+  {s:'tarifas',q:'Si hago un trabajo que no está en la tarifa:',o:['Uso distintos códigos hasta llegar al importe que quiero','Valoro el trabajo por horas + materiales o con genérico (ZB9) previa autorización del TSR territorial','Uso distintos códigos y añado un genérico u horas para que pase desapercibido'],a:1},
+  {s:'tarifas',q:'¿Cuándo tengo que pasar presupuesto?',o:['Si no lo tengo claro, mejor paso siempre presupuesto','Paso presupuesto cuando hago varios trabajos, da igual el importe','Paso presupuesto cuando el trabajo no usa tarifa o supera la autonomía de mi actividad'],a:2},
+
+  /* ── COB. FONTANERÍA ── */
   {s:'font',q:'¿Está cubierta la rotura de tuberías de riego?',o:['Sí, si la tubería es particular','No, si solo es de riego'],a:1},
   {s:'font',q:'¿Está cubierta la rotura de grifos o llaves de paso?',o:['Sí','No'],a:1},
   {s:'font',q:'¿Qué podemos hacer si no está cubierta la rotura de grifos o llaves de paso?',o:['Ofrecer Asistencia y que pague el cliente','Si tiene bricolaje del hogar, se cubriría el trabajo completo','Si tiene bricolaje del hogar, se cubre solamente la mano de obra'],a:2},
@@ -296,18 +284,24 @@ var QQ=[
   {s:'font',q:'¿Qué incluye el servicio de sellado?',o:['Fregaderos, sanitarios, bañeras y platos de ducha','Sanitarios, bañeras y platos de ducha','Sanitarios, bañeras, platos de ducha y mamparas de baño'],a:1},
   {s:'font',q:'¿Qué tuberías entran en la garantía de atascos?',o:['Desagües de aparatos y bajantes de la vivienda o edificio','Desagües de aparatos y de A/A, arquetas y bajantes incluso unión con el canalón','Desagües de aparatos y de A/A, arquetas, bajantes, canalones y sumideros'],a:1},
   {s:'font',q:'¿Cuántas intervenciones puedo hacer en una vivienda?',o:['Una en viviendas, en comunidades hasta el límite contratado y hogar selección sin límite','Una en viviendas y comunidades; hogar selección sin límite','En viviendas las que solicite el cliente; en comunidades hasta el límite contratado'],a:0},
+
+  /* ── COB. ALBAÑILERÍA ── */
   {s:'alba',q:'Si hay elementos afectados por agua pero no por rotura de tubería:',o:['Se repara siempre si se ve afectado por agua','Si no estoy seguro, al ver daños tengo que reparar','No se repara; excluido por no provenir de instalación de agua'],a:2},
   {s:'alba',q:'¿Qué reparamos cuando existe falta de mantenimiento?',o:['Nada; se indemniza el daño directo y ofrecemos asistencia para reparar con garantías','Intentamos hacer la reparación lo mejor posible','Nada, lo excluimos directamente'],a:0},
   {s:'alba',q:'¿Se aplican Daños Estéticos a perjudicados?',o:['Sí, en la estancia afectada','No, que lo reclamen a su compañía de seguros','Solo con autorización previa de la compañía; en primera instancia, no'],a:2},
   {s:'alba',q:'¿Se aplican Daños Estéticos en estancias distintas a la afectada?',o:['Solo en pólizas Hogar Platino; en el resto, solo la estancia afectada','Sí, pero solo cuando es el mismo material','No, en ningún caso'],a:0},
   {s:'alba',q:'¿Se aplica Daños Estéticos en muros exteriores o fachadas?',o:['Sí, en los dos casos si lo tienen contratado','En muros perimetrales exteriores no se aplica, pero en fachadas sí','En ninguno de los dos casos'],a:1},
   {s:'alba',q:'¿Reparamos los daños causados por lluvia (fenómenos atmosféricos)?',o:['Están excluidos siempre','Cubiertos si se superan unos límites y no hay falta de mantenimiento','Se cubre solo en comunidades'],a:1},
+
+  /* ── DAÑOS ELÉCTRICOS ── */
   {s:'elec',q:'¿Aplicamos depreciación en aparatos eléctricos y/o motores dañados?',o:['Sí, a partir del segundo año de antigüedad','Solo cuando la antigüedad supera el 75% de la vida útil del aparato','De eso se encarga el departamento de tramitación'],a:1},
   {s:'elec',q:'¿Cómo se calcula la depreciación?',o:['Calculo el 75% del valor del aparato','Con la tabla de depreciaciones, el PVP y los años del aparato','Con el PVP y los años descontamos un 10% de valor cada año'],a:1},
   {s:'elec',q:'¿Qué cubre la garantía de Daños Eléctricos?',o:['Cualquier avería en un aparato eléctrico o motor','Solo si la avería es por subida de tensión o cortocircuito en la línea','Si el motor está quemado y no funciona'],a:1},
   {s:'elec',q:'¿Cubrimos averías en mecanismos?',o:['Sí, por supuesto','No, pero con Bricolaje del hogar cubrimos todo','No, pero con Bricolaje del hogar cubrimos la mano de obra'],a:2},
   {s:'elec',q:'En bricolaje para instalar halógenos, ¿qué cubrimos?',o:['Solo cambiar los halógenos por otros en el mismo hueco','Los que soliciten siempre que no haya que hacer taladros','Solo donde haya un punto de luz existente, independientemente del taladro'],a:2},
   {s:'elec',q:'¿Se cubren las derivaciones?',o:['Sí, siempre que sea avería particular','No, se excluye directamente','No se excluye, pero intentamos averiguar la causa y dejamos servicio'],a:2},
+
+  /* ── CRISTALERÍA ── */
   {s:'crist',q:'¿Por qué póliza cubrimos cristal medianero entre dos terrazas?',o:['Por la póliza particular del vecino','Por la póliza de comunidad','Por las dos pólizas, particular y comunitaria'],a:2},
   {s:'crist',q:'¿Por qué póliza cubrimos cristal del frente de una terraza?',o:['Por la póliza particular','Por la póliza de comunidad','No se cubre ese cristal'],a:0},
   {s:'crist',q:'¿Se cubren los golpes en un escaparate?',o:['No, los daños superficiales no están cubiertos','Sí, si pertenece al local asegurado','Sí, si afecta a una cara del vidrio'],a:0}
@@ -410,15 +404,8 @@ function updateStats(){
   var circ=263.9;
   var circle=document.getElementById('prog-circle');
   var label=document.getElementById('circle-label');
-  if(pct===null){
-    circle.style.strokeDashoffset=circ;
-    circle.style.stroke='#e0e0e0';
-    label.textContent='—';
-  } else {
-    circle.style.strokeDashoffset=circ-(circ*(pct/100));
-    circle.style.stroke=pct>=70?'#2e7d32':'#ED1C24';
-    label.textContent=pct+'%';
-  }
+  if(pct===null){circle.style.strokeDashoffset=circ;circle.style.stroke='#e0e0e0';label.textContent='—';}
+  else{circle.style.strokeDashoffset=circ-(circ*(pct/100));circle.style.stroke=pct>=70?'#2e7d32':'#ED1C24';label.textContent=pct+'%';}
   document.getElementById('stat-answered').textContent=answeredQ||'—';
   document.getElementById('stat-correct').textContent=correctQ||'—';
   var rv=document.getElementById('stat-result');
@@ -507,94 +494,38 @@ function resetAll(){
   buildMenu();show('scr-menu');
 }
 
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-applyLayout();buildMenu();
-
-/* ── PWA: genera iconos y manifest inline ── */
+/* PWA inline */
 (function(){
+  function rrp(ctx,x,y,w,h,r){ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
   function drawIcon(size){
-    var cv=document.createElement('canvas');
-    cv.width=cv.height=size;
-    var ctx=cv.getContext('2d');
-    var r=size*0.21;
-    // background
-    ctx.beginPath();
-    ctx.moveTo(r,0);ctx.lineTo(size-r,0);ctx.quadraticCurveTo(size,0,size,r);
-    ctx.lineTo(size,size-r);ctx.quadraticCurveTo(size,size,size-r,size);
-    ctx.lineTo(r,size);ctx.quadraticCurveTo(0,size,0,size-r);
-    ctx.lineTo(0,r);ctx.quadraticCurveTo(0,0,r,0);ctx.closePath();
-    ctx.fillStyle='#ED1C24';ctx.fill();
-    var sc=size/512;
-    ctx.save();ctx.scale(sc,sc);
-    ctx.strokeStyle='#fff';ctx.fillStyle='#fff';ctx.lineJoin='round';ctx.lineCap='round';
-    // clipboard body
+    var cv=document.createElement('canvas');cv.width=cv.height=size;
+    var ctx=cv.getContext('2d'),r=size*0.21;
+    ctx.beginPath();ctx.moveTo(r,0);ctx.lineTo(size-r,0);ctx.quadraticCurveTo(size,0,size,r);ctx.lineTo(size,size-r);ctx.quadraticCurveTo(size,size,size-r,size);ctx.lineTo(r,size);ctx.quadraticCurveTo(0,size,0,size-r);ctx.lineTo(0,r);ctx.quadraticCurveTo(0,0,r,0);ctx.closePath();ctx.fillStyle='#ED1C24';ctx.fill();
+    var sc=size/512;ctx.save();ctx.scale(sc,sc);ctx.strokeStyle='#fff';ctx.fillStyle='#fff';ctx.lineJoin='round';ctx.lineCap='round';
     ctx.beginPath();rrp(ctx,116,140,280,264,28);ctx.lineWidth=24;ctx.stroke();
-    // clip top
     ctx.beginPath();rrp(ctx,196,100,120,72,24);ctx.lineWidth=22;ctx.stroke();
-    // check circle
     ctx.beginPath();ctx.arc(182,244,46,0,Math.PI*2);ctx.lineWidth=20;ctx.stroke();
-    // checkmark
     ctx.beginPath();ctx.moveTo(156,244);ctx.lineTo(176,268);ctx.lineTo(212,218);ctx.lineWidth=20;ctx.stroke();
-    // lines
     ctx.beginPath();ctx.moveTo(250,234);ctx.lineTo(346,234);ctx.lineWidth=20;ctx.stroke();
     ctx.beginPath();ctx.moveTo(250,262);ctx.lineTo(326,262);ctx.lineWidth=20;ctx.stroke();
-    // circle 2
     ctx.beginPath();ctx.arc(182,318,26,0,Math.PI*2);ctx.lineWidth=18;ctx.stroke();
     ctx.beginPath();ctx.moveTo(226,318);ctx.lineTo(336,318);ctx.lineWidth=18;ctx.stroke();
-    // circle 3
     ctx.beginPath();ctx.arc(182,374,26,0,Math.PI*2);ctx.lineWidth=18;ctx.stroke();
     ctx.beginPath();ctx.moveTo(226,374);ctx.lineTo(326,374);ctx.lineWidth=18;ctx.stroke();
-    // question bubble
     ctx.beginPath();ctx.arc(348,358,68,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
-    ctx.fillStyle='#ED1C24';ctx.font='bold 88px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText('?',348,365);
-    ctx.restore();
-    return cv.toDataURL('image/png');
+    ctx.fillStyle='#ED1C24';ctx.font='bold 88px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',348,365);
+    ctx.restore();return cv.toDataURL('image/png');
   }
-  function rrp(ctx,x,y,w,h,r){
-    ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-    ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-    ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-    ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
-  }
-
-  var i192=drawIcon(192);
-  var i512=drawIcon(512);
-  var i180=drawIcon(180);
-  var i152=drawIcon(152);
-  var i144=drawIcon(144);
-
-  // apple-touch-icon
+  var i192=drawIcon(192),i512=drawIcon(512),i180=drawIcon(180),i152=drawIcon(152),i144=drawIcon(144);
   document.getElementById('apple-icon').href=i180;
-
-  // favicon
-  var favicon=document.createElement('link');
-  favicon.rel='icon';favicon.type='image/png';favicon.href=drawIcon(32);
-  document.head.appendChild(favicon);
-
-  // manifest inline
-  var manifest={
-    name:'Ponte a Prueba',
-    short_name:'Ponte a Prueba',
-    description:'Cuestionario interactivo de formación',
-    start_url:'.',
-    display:'standalone',
-    orientation:'portrait',
-    background_color:'#ED1C24',
-    theme_color:'#ED1C24',
-    lang:'es',
-    icons:[
-      {src:i144,sizes:'144x144',type:'image/png',purpose:'any maskable'},
-      {src:i152,sizes:'152x152',type:'image/png',purpose:'any maskable'},
-      {src:i180,sizes:'180x180',type:'image/png',purpose:'any maskable'},
-      {src:i192,sizes:'192x192',type:'image/png',purpose:'any maskable'},
-      {src:i512,sizes:'512x512',type:'image/png',purpose:'any maskable'}
-    ]
-  };
+  var fav=document.createElement('link');fav.rel='icon';fav.type='image/png';fav.href=drawIcon(32);document.head.appendChild(fav);
+  var manifest={name:'Ponte a Prueba',short_name:'Ponte a Prueba',description:'Cuestionario interactivo de formación',start_url:'.',display:'standalone',orientation:'portrait',background_color:'#ED1C24',theme_color:'#ED1C24',lang:'es',icons:[{src:i144,sizes:'144x144',type:'image/png',purpose:'any maskable'},{src:i152,sizes:'152x152',type:'image/png',purpose:'any maskable'},{src:i180,sizes:'180x180',type:'image/png',purpose:'any maskable'},{src:i192,sizes:'192x192',type:'image/png',purpose:'any maskable'},{src:i512,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
   var blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  document.getElementById('pwa-manifest').href=url;
+  document.getElementById('pwa-manifest').href=URL.createObjectURL(blob);
 })();
+
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+applyLayout();buildMenu();
 </script>
 </body>
 </html>
