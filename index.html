@@ -219,10 +219,10 @@ var GROUPS=[
     {id:'tarifas',  name:'Tarifas',          icon:'📋'}
   ]},
   {label:'Coberturas', secs:[
-    {id:'font', name:'Fontanería',       icon:'🔧'},
-    {id:'alba', name:'Albañilería',      icon:'🏗️'},
-    {id:'crist',name:'Cristalería',      icon:'🪟'},
-    {id:'elec', name:'Daños eléctricos', icon:'⚡'}
+    {id:'font', name:'Daños por agua',        icon:'💧'},
+    {id:'alba', name:'Daños estéticos',       icon:'🎨'},
+    {id:'elec', name:'Daños eléctricos',      icon:'⚡'},
+    {id:'crist',name:'Atmosféricos/Todo Riesgo', icon:'🌩️'}
   ]}
 ];
 var SECS=[];
@@ -254,20 +254,23 @@ var QQ=[
   {s:'aplic',q:'¿Cuándo genero el parte de trabajo en un siniestro, en la primera visita o al finalizar los trabajos?',o:['No es necesario realizar parte de trabajo en ningún momento','En la visita previa para ver los trabajos y tomar medidas, al final no es necesario','En la última intervención cuando se finalizan los trabajos, aunque también se puede hacer en la primera visita en ciertos casos'],a:2},
 
   /* ── MULTIMAP ── */
-  {s:'multimap',q:'Las condiciones para la aplicación del IVA reducido son:',o:['Material no supera el 40% del total, no vivienda en alquiler y sin reforma en menos de dos años','A cualquier cliente si el material no supera el 40% del total','Que no sea vivienda en alquiler y tenga más de dos años, sin importar el importe'],a:0},
-  {s:'multimap',q:'¿Cómo gestiono el pago de la Asistencia?',o:['En efectivo prioritariamente','Preferiblemente por recibo domiciliado o por tarjeta','A partir de 1.500€ con pago adelantado del cliente','La b y la c son correctas'],a:3},
-  {s:'multimap',q:'Si el asegurado se lo tiene que pensar, ¿qué pasos sigo en Appcol?',o:['Dejo abierto el parte una semana','Selecciono PENDIENTE DE ACEPTACIÓN y queda cerrado automáticamente','Selecciono PENDIENTE DE ACEPTACIÓN y luego lo cierro por Infocol con PRESUPUESTO/AUTORIZACIÓN'],a:2},
-  {s:'multimap',q:'Si el cliente no está presente, ¿quién firma el presupuesto?',o:['Si el asegurado no firma, no realizaré el trabajo','Puede firmar otra persona autorizada por escrito, anotándolo en Notas del presupuesto','Hago el trabajo igualmente, la firma no es imprescindible'],a:1},
-  {s:'multimap',q:'¿Qué precios debo usar para calcular un presupuesto de asistencia?',o:['La tarifa de CLIENTE','La tarifa de PROVEEDOR','El precio de mercado'],a:0},
-  {s:'multimap',q:'¿Qué hago si un cliente no tiene correo electrónico?',o:['Dejo el correo en blanco; Multimap lo envía por correo ordinario','Anoto mi correo y continúo haciendo el presupuesto por APPCOL','Hago el presupuesto en papel y lo entrego'],a:0},
-  {s:'multimap',q:'¿Cuándo tengo que hacer presupuesto previo porque el trabajo lo paga el cliente?',o:['Siniestros Verti, Oficinas Mapfre, Contratos Multimap','Asistencias Mapfre, Cliente Externo, Asistencias Verti','Siniestros Mapfre, Oficinas Verti, Contratos básicos'],a:1},
+  {s:'multimap',q:'Cuando estoy en un siniestro o bricolaje, ¿puedo abrir una asistencia si me lo solicita un cliente?',o:['No, eso lo debe hacer el cliente llamando a la compañía','Sí, por Appcol desde la opción IPS me abro yo mismo la asistencia, pero también se puede por Infocol','Sí, llamo a batería de proveedores para que abran la Asistencia y me la asignen'],a:1},
+  {s:'multimap',q:'¿Cómo abro una Asistencia a un cliente de VERTI o de Iberdrola cuando estoy en la vivienda por un Siniestro o bricolaje?',o:['Llamo a batería de proveedores para que abran la Asistencia y me la asignen','Sólo la puede abrir por teléfono el cliente, diciendo mi código de proveedor para que me la asignen','La abro yo desde Appcol por la opción IPS, abriendo una Asistencia con servicio para mí'],a:1},
+  {s:'multimap',q:'¿Cuándo tengo que hacer presupuesto previo y recabar la firma del cliente antes de iniciar un trabajo?',o:['En siniestros de Verti y oficinas de Mapfre porque empiezan por M','En Asistencias de clientes Mapfre, Asistencias de Verti y en clientes externos','Siempre lo hago cuando no se trata de un siniestro'],a:1},
+  {s:'multimap',q:'En una Asistencia que paga el cliente ¿es necesario que firme la aceptación del presupuesto antes de iniciar los trabajos?',o:['Sí, se firmará siempre el Recibo al finalizar los trabajos','Sí, se firmará siempre la Aceptación de presupuesto y, al final de los trabajos, el Recibo','No, no es necesario firmar la aceptación del presupuesto previamente'],a:1},
+  {s:'multimap',q:'¿Es necesario realizar parte de trabajo en un Siniestro Verti o una Oficina de Mapfre?',o:['No, no es necesario porque la opción que me da en Appcol es hacer un presupuesto','Sí, al finalizar los trabajos generamos un presupuesto con importe cero y recogemos las firmas del cliente','Sí, paso presupuesto previo y espero autorización'],a:1},
+  {s:'multimap',q:'¿De qué formas se puede pagar una Asistencia?',o:['En efectivo de forma prioritaria','Efectivo hasta 500€, recibo domiciliado o tarjeta, para todos los tipos de clientes','Efectivo hasta 500€, recibo domiciliado o tarjeta; los clientes Verti y externos no pueden pagar mediante recibo domiciliado'],a:2},
+  {s:'multimap',q:'¿Si el cliente no está presente, quién firma el presupuesto?',o:['Si el asegurado no firma, no realizo el trabajo','Puede firmar otra persona (p.ej. inquilino) pero autorizado por escrito por asegurado y anotándolo en "Notas del presupuesto"','Hago el trabajo igualmente, esta firma no es imprescindible'],a:1},
+  {s:'multimap',q:'¿Qué hago si un cliente no tiene correo electrónico?',o:['Dejo la casilla del correo en blanco y realizo el presupuesto porque Multimap lo envía por correo ordinario','Anoto mi correo y continúo haciendo el presupuesto por APPCOL','Hago el presupuesto en papel y lo entrego'],a:0},
+  {s:'multimap',q:'¿Qué opción de Infocol tengo que seleccionar cuando el asegurado no acepta un presupuesto o se lo va a pensar?',o:['Por opción de Trabajo realizado, poniendo en mi descuento que no aceptan el presupuesto','Por la opción de Presupuesto/Autorización, indicando el importe del presupuesto','Da igual puesto que no ha aceptado el presupuesto'],a:1},
 
   /* ── TARIFAS ── */
-  {s:'tarifas',q:'¿Cuándo se utiliza el código base?',o:['Tantas veces como trabajos diferentes haya hecho','Solamente una vez por cada trabajo realizado a la vez','Se aplica junto con las visitas o para facturar una visita'],a:1},
-  {s:'tarifas',q:'¿Debo facturar por pasar presupuesto?',o:['No facturo este concepto porque luego hago el trabajo','Sí, lo facturo como una visita','Solo se factura si el trabajo es muy grande'],a:0},
-  {s:'tarifas',q:'¿Cómo aplico códigos principales y secundarios?',o:['Aplico siempre códigos principales','Aplico el código principal de mayor importancia y el resto adicionales','Aplico siempre adicionales'],a:1},
-  {s:'tarifas',q:'Si hago un trabajo que no está en la tarifa:',o:['Uso distintos códigos hasta llegar al importe que quiero','Valoro el trabajo por horas + materiales o con genérico (ZB9) previa autorización del TSR territorial','Uso distintos códigos y añado un genérico u horas para que pase desapercibido'],a:1},
-  {s:'tarifas',q:'¿Cuándo tengo que pasar presupuesto?',o:['Si no lo tengo claro, mejor paso siempre presupuesto','Paso presupuesto cuando hago varios trabajos, da igual el importe','Paso presupuesto cuando el trabajo no usa tarifa o supera la autonomía de mi actividad'],a:2},
+  {s:'tarifas',q:'En un siniestro ¿están cubiertas las mejoras y los trabajos de mantenimiento?',o:['Sí, siempre tengo que hacer lo que me solicita el cliente','Nunca, no se realizan mejoras ni se cubren averías derivadas de la falta de mantenimiento','Las mejoras no están cubiertas, pero si detecto falta de mantenimiento puedo realizar una puesta a punto'],a:1},
+  {s:'tarifas',q:'¿Cuándo se utiliza el código base?',o:['Si tengo más de un expediente en la misma vivienda, pongo un código base por cada expediente','Solamente una vez por cada trabajo realizado en el mismo momento, aunque sea en varias viviendas','Utilizo tantos códigos base como trabajos diferentes haya hecho'],a:1},
+  {s:'tarifas',q:'¿Cómo aplico códigos principales y adicionales si se da el caso?',o:['Aplico siempre códigos principales','Aplico el código principal de mayor importancia y el resto adicionales','Aplico siempre adicionales'],a:1},
+  {s:'tarifas',q:'¿Cómo facturo un trabajo que no está en la tarifa?',o:['Busco distintos códigos hasta llegar al importe que quiero facturar','Uso distintos códigos y añado un código genérico (ZB9) u horas para que pase desapercibido','Valoro el trabajo por horas + materiales o uso un genérico (ZB9) siempre con autorización del TSR territorial'],a:2},
+  {s:'tarifas',q:'¿Cuándo tengo que pasar presupuesto en un siniestro?',o:['Paso presupuesto cuando hago varios trabajos, da igual el importe','Paso presupuesto cuando no uso tarifa o supera la autonomía de mi actividad','Si no lo tengo claro, mejor paso siempre presupuesto'],a:1},
+  {s:'tarifas',q:'¿Debo facturar por pasar presupuesto en un siniestro?',o:['No facturo este concepto porque luego voy a realizar el trabajo','Sí, lo facturo como una visita','Solo se factura si el presupuesto es muy elevado'],a:0},
 
   /* ── COB. FONTANERÍA ── */
   {s:'font',q:'¿Está cubierta la rotura de tuberías de riego?',o:['Sí, si la tubería es particular','No, si solo es de riego'],a:1},
