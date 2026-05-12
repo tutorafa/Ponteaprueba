@@ -530,7 +530,24 @@ function resetAll(){
   document.getElementById('pwa-manifest').href=URL.createObjectURL(blob);
 })();
 
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').then(function(reg){
+    reg.addEventListener('updatefound', function(){
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function(){
+        if(newWorker.state === 'installed' && navigator.serviceWorker.controller){
+          // Nueva versión disponible: fuerza recarga
+          newWorker.postMessage({type:'SKIP_WAITING'});
+        }
+      });
+    });
+  });
+  // Cuando el SW toma el control, recarga la página para aplicar cambios
+  var refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    if(!refreshing){ refreshing = true; window.location.reload(); }
+  });
+}
 applyLayout();buildMenu();
 </script>
 </body>
